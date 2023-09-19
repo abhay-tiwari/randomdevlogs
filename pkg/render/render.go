@@ -6,21 +6,38 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/abhay-tiwari/randomdevlogs/pkg/config"
+	"github.com/abhay-tiwari/randomdevlogs/pkg/models"
 )
 
-func RenderTemplate(w http.ResponseWriter, tmpl string) {
+var appConfig *config.AppConfig
 
-	templateCache, err := CreateTemplateCache()
+func NewTemplates(config *config.AppConfig) {
+	appConfig = config
+}
 
-	if err != nil {
-		log.Fatal(err)
+func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+	return td
+}
+
+func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+
+	var templateCache map[string]*template.Template
+
+	if appConfig.UseCache {
+		templateCache = appConfig.TemplateCache
+	} else {
+		templateCache, _ = CreateTemplateCache()
 	}
 
 	template, _ := templateCache[tmpl]
 
 	buffer := new(bytes.Buffer)
 
-	err = template.Execute(buffer, nil)
+	td = AddDefaultData(td)
+
+	err := template.Execute(buffer, td)
 
 	if err != nil {
 		log.Println(err)
