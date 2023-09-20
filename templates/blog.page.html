@@ -1,0 +1,32 @@
+{{ template "base" .}}
+
+{{ define "content" }}
+  <div class="container blog-page text-white">
+    <h2>Min Steps in Infinite Grid | Interview Coding Problem | JavaScript</h2>
+    <p>You are in a limitless 2D grid, where you can move in any of the eight directions. Each movement allows you to move from your current point (x, y) to adjacent points such as (x-1, y-1), (x-1, y), (x-1, y+1), (x, y-1), (x, y+1), (x+1, y-1), (x+1, y), and (x+1, y+1). Now, You are given sequence of points. The challenge is to determine the minimum number of steps required to reach each point in the given order.</p>
+
+    <p>Problem can broken down in following points</p>
+
+    <ul class="">
+      <li>Given a sequence of points.</li>
+      <li>Start from the first point and move to successive points.</li>
+      <li>Objective: Find the shortest path to reach each point in the provided order.</li>
+      <li>Minimize the number of steps taken.</li>
+      <li>Consider eight possible directions for movement.</li>
+    </ul>
+
+    <h2>Solution in JavaScript</h2>
+    <p>JavaScript function to solve above coding problem is as follows.</p>
+
+    <h2>Code Explanation</h2>
+    <p>Step by step code explanation of JavaScript function is as follows.</p>
+    <ul>
+      <li>The function minStepsinGrid iterates through the sequence of points.</li>
+      <li>It calculates the minimum steps needed to reach the next point.</li>
+      <li>The function adds the difference between the absolute values of the coordinates.</li>
+      <li>This logic ensures consideration of both horizontal and vertical movements.</li>
+      <li>The goal is to minimize the total number of steps required.</li>
+    </ul>
+  </div>
+{{end}}
+
