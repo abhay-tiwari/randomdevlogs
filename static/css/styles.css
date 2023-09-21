@@ -1,0 +1,106 @@
+body {
+  background-color: #292F36;
+  letter-spacing: 1.5px;
+  font-family: 'Roboto', sans-serif; 
+}
+      
+.bg-primary {
+    background-color: #FF6B6B !important;
+}
+
+.text-white {
+    color: #EEE !important;
+}
+
+.navbar {
+  height: 60px;
+}
+.navbar-brand {
+  letter-spacing: 3px;
+  font-size: 1.125rem;
+}
+
+.navbar-brand:hover {
+  text-decoration: underline;
+}
+
+.nav-link {
+  letter-spacing: 2.5px;
+  font-weight: 400;
+}
+
+.nav-link:hover, .nav-link:focus {
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 { 
+  color: #FF6B6B;
+}
+
+p {
+    font-weight: 300;
+}
+ ul li {
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 1.375rem;
+  font-weight: 400;
+}
+
+.btn-primary {
+  border-radius: 0;
+  background-color: #292F36;
+  border-color: #FF6B6B;
+  color: #FF6B6B;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 300;
+  transition: 0.25s all;
+ }
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #FF6B6B;
+  color: #FFF;
+}
+
+.footer {
+  padding: 1.5rem 0;
+  border-top: 1px solid #EEE;
+  margin-top: 1rem;
+}
+      
+.footer-text {
+  text-align: center;
+  letter-spacing: 2.5px;
+}
+
+      
+.blog-page {
+  padding: 1rem;
+  border: 1px solid #EEE;
+  margin-top: 1.5rem;
+  border-radius: 4px;
+}
+
+.blog-card {
+  padding: 0.75rem;
+}
+
+.blog-card h3 {
+   padding-bottom: 0.25rem;
+}
+
+.blog-card-inner {
+  border: 1px solid #EEE;
+  padding: 1rem;
+  border-radius: 4px;
+}
