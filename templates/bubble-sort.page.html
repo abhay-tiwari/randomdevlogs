@@ -1,0 +1,36 @@
+{{ template "base" .}}
+
+{{define "css"}}
+<link rel="stylesheet" href="/static/css/bubble-sort.css">
+{{end}}
+
+{{define "content"}}
+  <section id="bubble-sort" class="bubbles-sort text-white">
+    <div class="array-items">
+      <div class="array-item" style="left: 0;">4</div>
+      <div class="array-item" style="left: 50px;">5</div>
+      <div class="array-item" style="left: 100px;">3</div>
+      <div class="array-item" style="left: 150px">1</div>
+      <div class="array-item" style="left: 200px">6</div>
+      <div class="array-item" style="left: 250px">2</div>
+    </div>
+
+    <div class="loop-counters">
+      <div class="loop-counter-i" style="left: 260px;">
+        n - i
+      </div>
+      <div class="loop-counter-j" style="left: 25px">
+        j
+      </div>
+    </div>
+
+    <div>
+      <button class="prev-btn" type="button"> prev</button>
+      <button class="next-btn" type="button">next</button>
+    </div>
+  </section>
+{{end}}
+
+{{define "js"}}
+<script src="/static/js/bubble-sort.js"></script>
+{{end}}
