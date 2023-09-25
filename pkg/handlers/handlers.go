@@ -25,7 +25,7 @@ func NewHandler(r *Repository) {
 }
 
 func (m *Repository) Index(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "bubble-sort.page.html", &models.TemplateData{})
+	render.RenderTemplate(w, "index.page.html", &models.TemplateData{})
 }
 
 func (m *Repository) BubbleSort(w http.ResponseWriter, r *http.Request) {

@@ -147,3 +147,7 @@ code {
 .copy-btn.copied .fa-check {
   display: inline;
 }
+
+.read-more-btn {
+  font-size: 0.875rem;
+}
