@@ -67,9 +67,10 @@ h3 {
   transition: 0.25s all;
  }
 
-.btn-primary:hover, .btn-primary:focus {
-  background-color: #FF6B6B;
-  color: #FFF;
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: #FF6B6B !important;
+  color: #FFF !important;
+  border-color: #FF6B6B !important;
 }
 
 .footer {
@@ -103,4 +104,46 @@ h3 {
   border: 1px solid #EEE;
   padding: 1rem;
   border-radius: 4px;
+}
+
+.blog-container {
+  max-width: 991px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ol li, ul li {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+  font-weight: 300;
+}
+
+pre {
+  box-shadow: 2px 1px 8px 1px rgb(0 0 0 / 50%);
+  border-radius: 12px;
+}
+
+code {
+  background-color: #292F36 !important;
+}
+
+.copy-btn {
+  color: #FF6B6B;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 1.125rem;
+  transition: all 0.25s;
+}
+
+.copy-btn.copied .fa-copy {
+  display: none;
+}
+
+.copy-btn .fa-check {
+  display: none;
+}
+
+.copy-btn.copied .fa-check {
+  display: inline;
 }

@@ -31,7 +31,6 @@
   position: absolute;
   top: 25px;
   color: #FF6B6B;
-  font-weight: 700;
   transition: all 0.25s;
 }
 
@@ -48,7 +47,6 @@
   top: 25px;
   color: #FF6B6B;
   transition: all 0.25s;
-  font-weight: 600;
 }
 
 .loop-counter-j:after {
@@ -57,4 +55,28 @@
     position: absolute;
     top: -17px;
     left: -4px;
+}
+
+.prev-btn {
+  margin-right: 0.5rem;
+}
+
+.next-btn {
+  margin-left: 0.5rem;
+}
+
+.bubble-sort__code-container {
+  position: relative;
+}
+
+.bubble-sort__visualization {
+  font-weight: 300;
+}
+
+.bubble-sort__visualization p i {
+  color: #FF6B6B;
+}
+
+.bubble-sort__complexity span{
+  color: #FF6B6B;
 }
