@@ -28,6 +28,10 @@ func (m *Repository) Index(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "index.page.html", &models.TemplateData{})
 }
 
+func (m *Repository) Algorithms(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "algorithms.page.html", &models.TemplateData{})
+}
+
 func (m *Repository) BubbleSort(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "bubble-sort.page.html", &models.TemplateData{})
 }

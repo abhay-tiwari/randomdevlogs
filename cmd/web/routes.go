@@ -16,8 +16,9 @@ func routes(app *config.AppConfig) http.Handler {
 
 	mux.Get("/", handlers.Repo.Index)
 
-	mux.Route("/dsa", func(r chi.Router) {
+	mux.Route("/algorithms", func(r chi.Router) {
 		r.Get("/bubble-sort", handlers.Repo.BubbleSort)
+		r.Get("/", handlers.Repo.Algorithms)
 	})
 
 	fileServer := http.FileServer(http.Dir("./static/"))
