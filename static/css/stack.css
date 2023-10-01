@@ -15,16 +15,16 @@
 .stack__top {
   color: #FF6B6B;
   position: absolute;
-  right: -168px;
+  right: -125px;
   transition: all 0.5s;
 }
 
 .stack__top:after {
   content: '';
   position: absolute;
-  width: 100px;
+  width: 75px;
   height: 1px;
-  left: -120px;
+  left: -90px;
   top: 13px;
   background-color: #FF6B6B;
 }

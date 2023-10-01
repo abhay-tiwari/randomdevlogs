@@ -86,7 +86,6 @@ const push = () => {
 const pop = () => {
   let x = stack[topEl];
   topEl -= 1;
-  debugger;
 
   switch(topEl) {
     case -1:
