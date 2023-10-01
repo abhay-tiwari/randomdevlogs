@@ -32,6 +32,14 @@ func (m *Repository) Algorithms(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "algorithms.page.html", &models.TemplateData{})
 }
 
+func (m *Repository) DataStructures(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "data-structures.page.html", &models.TemplateData{})
+}
+
 func (m *Repository) BubbleSort(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "bubble-sort.page.html", &models.TemplateData{})
+}
+
+func (m *Repository) Stack(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "stack.page.html", &models.TemplateData{})
 }

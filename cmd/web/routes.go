@@ -21,6 +21,11 @@ func routes(app *config.AppConfig) http.Handler {
 		r.Get("/", handlers.Repo.Algorithms)
 	})
 
+	mux.Route("/data-structures", func(r chi.Router) {
+		r.Get("/stack", handlers.Repo.Stack)
+		r.Get("/", handlers.Repo.DataStructures)
+	})
+
 	fileServer := http.FileServer(http.Dir("./static/"))
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
 
