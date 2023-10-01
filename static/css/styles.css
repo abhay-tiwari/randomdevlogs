@@ -54,6 +54,10 @@ h3 {
   font-weight: 400;
 }
 
+b{
+  color: #FF6B6B;
+}
+
 .btn-primary {
   border-radius: 0;
   background-color: #292F36;
@@ -125,6 +129,10 @@ pre {
 
 code {
   background-color: #292F36 !important;
+}
+
+.code-block {
+  position: relative;
 }
 
 .copy-btn {

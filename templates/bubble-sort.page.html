@@ -7,12 +7,8 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Bubble Sort in CPP - Random Devlogs">
 <meta property="og:description" content="Bubble Sort is a basic sorting algorithm that repeatedly steps through the list of elements, compares adjacent elements, and swaps them if they are in wrong order.">
-<meta property="og:url" content="https://randomdevlogs.com/dsa/bubble-sort">
+<meta property="og:url" content="https://randomdevlogs.com/algorithms/bubble-sort">
 <meta property="og:site_name" content="Random Devlogs">
-<meta property="og:locale" content="en_US">
-<meta property="og:locale" content="en_US">
-<meta property="og:locale" content="en_US">
-
 {{end}}
 
 {{define "css"}}
@@ -71,7 +67,7 @@
     <section class="bubble-sort__code mt-5">
       <h2>Bubble Sort Implementation in C++</h2>
       <p>Bubble Sort implementation in C++ is as follows</p>
-      <div class="bubble-sort__code-container">
+      <div class="bubble-sort__code-container code-block">
         <pre class="mt-5 px-3">
           <code class="langauge-cpp">#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;void bubblesort(int arr[], int n) {&#13;  for(int i=0; i&lt;n - 1; i++) {&#13;    for(int j=0; j&lt;n - 1 - i; j++) {&#13;      if(arr[j] &gt; arr[j + 1]) {&#13;        int temp = arr[j];&#13;        arr[j] = arr[j + 1];&#13;        arr[j + 1] = temp;&#13;      }&#13;    }&#13;  }&#13;}&#13;&#13;int main() {&#13;  int arr[] = {4, 5, 3, 1, 6, 2};&#13;  int pos[] = {0, 50, 100, 150, 200, 250};&#13;  int n = sizeof(arr)/sizeof(arr[0]);&#13;  &#13;  bubblesort(arr, n);&#13;  &#13;  cout &lt;&lt; &quot;array after sorting is &quot; &lt;&lt; endl;&#13;  &#13;  for(int i=0; i&lt;n; i++) {&#13;    cout &lt;&lt; arr[i] &lt;&lt; &quot; &quot;;&#13;  }&#13;&#13;  cout &lt;&lt; endl;&#13;&#13;  return 0;&#13;}</code>
         </pre>

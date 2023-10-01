@@ -1,0 +1,175 @@
+{{ template "base" .}}
+
+{{define "meta"}}
+<title>Stack in CPP - Random Devlogs</title>
+<meta name="description" content=""/>
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stack in CPP - Random Devlogs">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://randomdevlogs.com/data-structures/stack">
+<meta property="og:site_name" content="Random Devlogs">
+{{end}}
+
+{{define "css"}}
+<link rel="stylesheet" href="/static/css/stack.css">
+{{end}}
+
+{{define "content"}}
+<div id="stack" class="stack blog-container text-white mt-5 p-3">
+  <section class="stack__introduction">
+     <h2>What is Stack?</h2>
+     <p>Stack is fundamental data structure in computer science and plays important role in various applications and algorithms. Stack is a linear data structure that follows the Last-In-First-Out(LIFO) principle i.e. the last element added to the stack is the first one to be removed. In this blog, we will explore </p>
+     <ul>
+       <li>Basics of Stacks</li>
+       <li>Various Stack Operations</li>
+       <li>Real World Applications of Stack</li>
+     </ul>
+  </section>
+  
+  <section class="stack__basics mt-5">
+    <h2>How Stack Works?</h2>
+    <p>At its core stack is a collection of elements with folowing operations.</p>
+    <ol>
+      <li>
+        <b>Push</b>: Push adds an element to the top of stack.
+      </li>
+      <li>
+        <b>Pop</b>: Pop removes an element from the top of the stack.
+      </li>
+      <li>
+        <b>Peak</b>: Peak returns element from the top of stack if stack is not empty.
+      </li>
+      <li>
+        <b>isEmpty</b>: isEmpty returns true if stack has no elements else it returns false.
+      </li>
+    </ol>
+    <p>Stacks can be implemented using various data structures like arrays or linkedlist depending upon the requirement of the application.</p>
+  </section>
+
+  <section class="stack__features">
+    <h2>Key Features of Stack</h2>
+    <ol>
+      <li>
+        <b>LIFO Principle:</b> As Mentioned earlier, stack follows the Last-In-First-Out principle. Last element pushed onto stack is the first one to be popped off.
+      </li>
+      <li>
+        <b>Single Access Point:</b> Stack has only one acceess point. Elements can be added or removed only from top of the stack. This feature makes stack useful for specific cases.
+      </li>
+    </ol>
+  </section>
+
+  <section class="stack__visualization">
+   <h2>Stack Operation Visualization</h2>
+   <p>Visualization of various Stack Operation are as follows.</p>
+   <div class="stack__container">
+    <div class="stack__item zero" style="top: -70px; opacity: 0;">
+      1
+    </div>
+    
+    <div class="stack__item one" style="top: -70px; opacity: 0;">
+    2
+    </div>
+
+    <div class="stack__item two" style="top: -70px; opacity: 0;">
+    3
+    </div>
+
+    <div class="stack__item three" style="top: -70px; opacity: 0;">
+    4
+    </div>
+
+    <div class="stack__item four" style="top: -70px; opacity: 0;">
+    5
+    </div>
+
+    <div class="stack__item five" style="top: -70px; opacity: 0;">
+    6
+    </div>
+    
+    <div class="stack__top" style="bottom: -11px;">Top</div>
+   </div>
+   <div class="stack__controls d-flex align-items-center justify-content-center">
+    <input type="number" class="form-control" placeholder="Element to Push" onchange="handleElInputChange(event)">
+    <button type="button" class="btn btn-primary" onclick="push(this)">Push</button>
+    <button type="button" class="btn btn-primary" onclick="pop(this)">Pop</button>
+   </div>
+  <div class="stack__controls-error">
+  </div>
+  </section>
+
+  <section class="stack__implementation">
+    <h2>Stack Implementation in C++</h2>
+    <p>In this blog post, we will using class and array to implement stack in C++.</p>
+    <p>We will define max size of stack globally and create a stack class.</p>
+    <div class="stack__code-block code-block">
+          <pre>
+      <code>#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;// max size of stack&#13;const int MAX_SIZE = 6;&#13;&#13;class Stack {&#13;private:&#13;  int stack[MAX_SIZE];&#13;  // top of the stack.&#13;  int top;&#13;&#13;public:&#13;  Stack() {&#13;    top = -1;&#13;  }&#13;};
+      </code>
+    </pre>
+        <button class="btn copy-btn" onclick="onCopyButtonClick(this)">
+          <i class="fa-regular fa-copy"></i>
+          <i class="fa-solid fa-check"></i>
+    </button>
+
+    </div>
+
+    <h3>Push Operation</h3>
+    <p>Push Operation add an element on top of the stack if stack is not full. After adding push method to <b>Stack</b> class C++ code looks as follows:</p>
+    <div class="stack__code-block code-block">
+      <pre>
+      <code>#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;// max size of stack&#13;const int MAX_SIZE = 6;&#13;&#13;class Stack {&#13;private:&#13;  int stack[MAX_SIZE];&#13;  // top of the stack.&#13;  int top;&#13;&#13;public:&#13;  Stack() {&#13;    top = -1;&#13;  }&#13;&#13;  // method to check if stack is full.&#13;  bool isFull() {&#13;    return top == MAX_SIZE - 1;&#13;  }&#13;&#13;  // method to push element in stack.&#13;  void push(int element) {&#13;    if(isFull() == true) {&#13;      cout &lt;&lt; &quot;Stack is full.&quot; &lt;&lt; endl;&#13;      return;&#13;    }&#13;    top++;&#13;    stack[top] = element;&#13;  }&#13;};</code>
+    </pre>
+    <button class="btn copy-btn" onclick="onCopyButtonClick(this)">
+          <i class="fa-regular fa-copy"></i>
+          <i class="fa-solid fa-check"></i>
+    </button>
+    </div>
+
+    <h3>Pop Operation</h3>
+    <p>Pop operation removed and returns element of top of the stack if stack is not empty. <b>Stack</b> class after adding pop method to class is as follows.</p>
+    <div class="stack__code-block code-block">
+          <pre>
+    <code>#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;// max size of stack&#13;const int MAX_SIZE = 6;&#13;&#13;class Stack {&#13;private:&#13;  int stack[MAX_SIZE];&#13;  // top of the stack.&#13;  int top;&#13;&#13;public:&#13;  Stack() {&#13;    top = -1;&#13;  }&#13;&#13;  // method to check if stack is empty.&#13;  bool isEmpty() {&#13;    return top == -1;&#13;  }&#13;&#13;  // metho to check if stack is full.&#13;  bool isFull() {&#13;    return top == MAX_SIZE - 1;&#13;  }&#13;&#13;  // method to push element in stack.&#13;  void push(int element) {&#13;    if(isFull() == true) {&#13;      cout &lt;&lt; &quot;Stack is full.&quot; &lt;&lt; endl;&#13;      return;&#13;    }&#13;    top++;&#13;    stack[top] = element;&#13;  }&#13;&#13;  // method to pop top element of stack.&#13;  int pop() {&#13;    if(isEmpty() == true) {&#13;      cout &lt;&lt; &quot;Stack is empty&quot; &lt;&lt; endl;&#13;      return -1;&#13;    }&#13;&#13;    int x = stack[top];&#13;    top--;&#13;    &#13;    return x;&#13;  }&#13;};</code>
+    </pre>
+        <button class="btn copy-btn" onclick="onCopyButtonClick(this)">
+          <i class="fa-regular fa-copy"></i>
+          <i class="fa-solid fa-check"></i>
+    </button>
+
+    </div>
+  </section>
+
+  <section class="stack__applications">
+    <h2>Real World Applications of Stack</h2>
+    <p>Stack has following real-world applications.</p>
+    <ol>
+      <li>
+        <b>Function Call Stack:</b> In programming languages such as C++ and Java, a stack is used to track of function calls and their local variables. When a function is called, its information is pushed into stack and when it returns, function is popped off.
+      </li>
+      <li>
+        <b>Expression Evalution:</b> Stacks are used to evaluate mathematical expression such as expressions written as infix notation. Stacks help maintain the correct order of operations.
+      </li>
+      <li>
+        <b>Undo and Redo Functionality:</b> Many applications such as text editor and graphics design apps use stack to implement undo and redo functionality. Each action pushed to stack allowing user to backtrack and redo operations.
+      </li>
+      <li>
+        <b>BackTracking Algorithms:</b> Algorithms like depth first search (DFS) use stack to keep track of visible nodes and explore path in systematic manner.
+      </li>
+    </ol>
+  </section>
+
+  <section class="stack__conclusion">
+    <h2>Conclusion</h2>
+    <p>
+        Stacks are fundamental data structure with simple yet powerful concept. Their Last-In-First-Out (LIFO) behaviour and limited access make them well-suited for various use cases of computer science and application development. Understanding stacks is essential for any programmer or computer scientist as stacks are building block for many advanced data structure and algorithms.
+    </p>
+   <p>Thanks for Reading. Have a Nice Day.</p>
+  </section>
+</div>
+{{end}}
+
+{{define "js"}}
+<script src="/static/js/stack.js"></script>
+{{end}}
+
