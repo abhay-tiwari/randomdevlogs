@@ -18,6 +18,7 @@ func routes(app *config.AppConfig) http.Handler {
 
 	mux.Route("/algorithms", func(r chi.Router) {
 		r.Get("/bubble-sort", handlers.Repo.BubbleSort)
+		r.Get("/linear-search", handlers.Repo.LinearSearch)
 		r.Get("/", handlers.Repo.Algorithms)
 	})
 

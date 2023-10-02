@@ -1,0 +1,132 @@
+{{ template "base"  .}}
+
+{{define "meta"}}
+<title>Linear Search in CPP - Random Devlogs</title>
+<meta name="description" content="Linear Search is a basic search algorithm that checks each element in a list until match of element is found or entire list in traversed. It is easy to implement and works on both sorted and unsorted data."/>
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linear Search in CPP - Random Devlogs">
+<meta property="og:description" content="Linear Search is a basic search algorithm that checks each element in a list until match of element is found or entire list in traversed. It is easy to implement and works on both sorted and unsorted data.">
+<meta property="og:url" content="https://randomdevlogs.com/algorithms/bubble-sort">
+<meta property="og:site_name" content="Random Devlogs">
+{{end}}
+
+{{define "css"}}
+<link rel="stylesheet" href="/static/css/linear-search.css">
+{{end}}
+
+{{define "content"}}
+<div id="linear-search" class="linear-search blog-container text-white mt-5 p-3">
+    <section class="linear-search__introduction">
+      <h2>What is Linear Search?</h2>
+      <p>Linear Search is a basic search algorithm that checks each element in a list until match of element is found or entire list in traversed. It is easy to implement and works on both sorted and unsorted data.</p>
+    </section>
+
+    <section class="linear-search__basics mt-5">
+      <h2>How Does Linear Search Works?</h2>
+      <p>Step by Step breakdown of Linear Search Alogrithm is as follows.</p>
+      <ol>
+        <li>Start at the first element of the list.</li>
+        <li>Compare the current element with the target value.</li>
+        <li>If the current element is equal to the target value, return the index of the element.</li>
+        <li>If the current element is not equal to the target value, move to the next element in the list.</li>
+        <li>Repeat steps 2-4 until a match is found or the end of the list is reached.</li>
+        <li>If the end of the list is reached without finding a match, element is not present in the list.</li>
+      </ol>
+    </section>
+    
+    <section class="linear-search__visualization mt-5">
+      <h2>Linear Search Visualization</h2>
+      <p>Interactive Visualization of linear search of value 6 in array [4, 2, 5, 1, 6, 7] is as follows.</p>
+      <div class="mt-0 text-white">Note: you can use <i class="fa-solid fa-angles-left"></i> to move previous step and <i class="fa-solid fa-angles-right"></i> to move next step.</div>
+      <div class="array-items text-white mt-4">
+        <div class="array-item" style="left: 0;">4</div>
+        <div class="array-item" style="left: 50px;">2</div>
+        <div class="array-item" style="left: 100px;">5</div>
+        <div class="array-item" style="left: 150px">1</div>
+        <div class="array-item search-element" style="left: 200px">6</div>
+        <div class="array-item" style="left: 250px">7</div>
+      </div>
+      <div class="loop-counters">
+        <div class="loop-counter-i" style="left: 20px;">
+          i
+        </div>
+    </div>
+
+    <div class="linear-search__visualization-data">
+     <span>arr[i] != 6</span> 
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center mt-2">
+      <button class="btn btn-primary prev-btn" type="button" onclick="onPrevButtonClick()"><i class="fa-solid fa-angles-left"></i></button>
+      <button class="btn btn-primary next-btn" type="button" onclick="onNextButtonClick()"><i class="fa-solid fa-angles-right"></i></button>
+    </div>
+    </section>
+
+    <section class="linear-search__implementation mt-5">
+      <h2>Implementation of Linear Search in C++</h2>
+      <p>Implementation of Linear Search in C++ is as follows.</p>
+      <div class="code-block">
+        <pre>
+          <code>#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;int linearSearch(int arr[], int n, int x) {&#13;  for(int i=0; i&lt; n; i++) {&#13;    // if element is found, return the index.&#13;    if(arr[i] == x) {&#13;      return i; &#13;    }&#13;  }&#13;&#13;  // return -1 if array is traversed and element is not found.&#13;  return -1;&#13;}&#13;&#13;int main() {&#13;  int arr[] = {4, 2, 5, 1, 6, 7};&#13;  int size = sizeof(arr)/sizeof(arr[0]);&#13;&#13;  cout &lt;&lt; linearSearch(arr, size, 1) &lt;&lt; endl; // output = 3&#13;}</code>
+       </pre>
+        <button type="button" class="btn copy-btn" onclick="onCopyButtonClick(this)">
+          <i class="fa-regular fa-copy"></i>
+          <i class="fa-solid fa-check"></i>
+        </button>
+      </div>
+    </section>
+
+    <section class="linear-search__advantages mt-5">
+      <h2>Advantages of Linear Search</h2>
+      <ol>
+        <li>
+          <b>Simplicity: </b> Linear search is easy to understand and implement, making it a valuable choice for small datasets or when simplicity is prioritized.
+        </li>
+        <li>
+          <b>Works with Unordered Data: </b> Linear search can be used on unordered data, as it doesn't rely on any specific order of elements in the list.
+        </li>
+        <li>
+          <b>Low Memory Usage: </b>  It has a small memory footprint since it doesn't require additional data structures or memory allocation.
+        </li>
+      </ol>
+    </section>  
+
+    <section class="linear-search__limitation mt-5">
+      <h2>Limitations of Linear Search</h2>
+      <ol>
+        <li>
+          <b>Inefficient for Large Datasets: </b>Linear search has a time complexity of O(n), meaning its performance decreases as the size of the dataset grows. For large datasets, more efficient algorithms like binary search are preferred.
+        </li>
+        <li>
+          <b>Not Suitable for Sorted Data: </b>When data is sorted, linear search is highly inefficient compared to binary search, which can take advantage of the ordered structure.
+        </li>
+      </ol>
+    </section>
+
+    <section class="linear-search__applications mt-5">
+      <h2>Real-World Applications</h2>
+      <ol>
+        <li>
+          <b>Phonebook Search:</b> Linear search can be used to find a contact in a phonebook. It sequentially checks each entry until it finds the desired contact.
+        </li>
+        <li>
+          <b>To-Do List Search:</b> When searching for a specific task in a to-do list, linear search can be employed to scan through the list and locate the task.
+        </li>
+        <li>
+          <b>Text Editors: </b> Some text editors use linear search to find and highlight instances of a particular word or phrase within a document.
+        </li>
+      </ol>
+    </section>
+
+    <section class="linear-search__conclusion mt-5">
+      <h2>Conclusion</h2>
+      <p>The Linear Search algorithm is fundamental method for finding elements in a list or array. While it has limitations such as performance issues for large datasets, it remains useful tool in various real-world applications where simplicity and ease of implementation are key priority. Understaging linear search provides a solid foundation for exploring more complex searching techniques in the field of computer science and algorithms</p>
+      <p>Thanks for Reading. Have a nice day.</p>
+    </section>
+</div>
+{{end}}
+
+{{define "js"}}
+<script src="/static/js/linear-search.js"></script>
+{{end}}

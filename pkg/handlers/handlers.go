@@ -43,3 +43,7 @@ func (m *Repository) BubbleSort(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) Stack(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "stack.page.html", &models.TemplateData{})
 }
+
+func (m * Repository) LinearSearch(w http.ResponseWriter, r *http.Request) {
+  render.RenderTemplate(w, "linear-search.page.html", &models.TemplateData{})
+}
