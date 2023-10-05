@@ -44,6 +44,22 @@ func (m *Repository) Stack(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "stack.page.html", &models.TemplateData{})
 }
 
-func (m * Repository) LinearSearch(w http.ResponseWriter, r *http.Request) {
-  render.RenderTemplate(w, "linear-search.page.html", &models.TemplateData{})
+func (m *Repository) LinearSearch(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "linear-search.page.html", &models.TemplateData{})
+}
+
+func (m *Repository) Queue(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "queue.page.html", &models.TemplateData{})
+}
+
+func (m *Repository) InorderTraversalRecursive(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "recursive-inorder-traversal.page.html", &models.TemplateData{})
+}
+
+func (m *Repository) PreOrderTraversalRecursive(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "recursive-preorder-traversal.page.html", &models.TemplateData{})
+}
+
+func (m *Repository) PostOrderTraversalRecursive(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "recursive-postorder-traversal.page.html", &models.TemplateData{})
 }

@@ -24,6 +24,10 @@ func routes(app *config.AppConfig) http.Handler {
 
 	mux.Route("/data-structures", func(r chi.Router) {
 		r.Get("/stack", handlers.Repo.Stack)
+		r.Get("/queue", handlers.Repo.Queue)
+		r.Get("/recursive-inorder-traversal", handlers.Repo.InorderTraversalRecursive)
+		r.Get("/recursive-preorder-traversal", handlers.Repo.PreOrderTraversalRecursive)
+		r.Get("/recursive-postorder-traversal", handlers.Repo.PostOrderTraversalRecursive)
 		r.Get("/", handlers.Repo.DataStructures)
 	})
 

@@ -1,0 +1,147 @@
+{{template "base" .}}
+
+{{define "meta"}}
+<title>Queue in CPP - Random Devlogs</title>
+<meta name="description" content="Queue is a fundamental data structure and it plays an important role in software development. Queue is useful in many real-world scenarios such as Printer Job Queues, Task Scheduling and Traffic Management."/>
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Queue in CPP - Random Devlogs">
+<meta property="og:description" content="Queue is a fundamental data structure and it plays an important role in software development. Queue is useful in many real-world scenarios such as Printer Job Queues, Task Scheduling and Traffic Management.">
+<meta property="og:url" content="https://randomdevlogs.com/data-structures/queue">
+<meta property="og:site_name" content="Random Devlogs">
+
+{{end}}
+
+{{define "css"}}
+  <link rel="stylesheet" href="/static/css/queue.css">
+{{end}}
+
+{{define "content"}}
+<div id="queue" class="queue blog-container mt-5 p-3 text-white">
+  <section class="queue__introduction">
+    <h2>What is Queue?</h2>
+    <p>Queue is a fundamental data structure and it plays an important role in software development. Queue is useful in many real-world scenarios such as Printer Job Queues, Task Scheduling and Traffic Management.</p>
+    <p>Queue is a linear data structure that follows the FIFO (First-In-First-Out).In queues, insert operations to be performed at one end called <b>REAR</b> and delete operations to be performed at another end called <b>FRONT</b>.</p>
+  </section>
+  <section class="queue__basics mt-5">
+    <h2>How Queue Works?</h2>
+    <p>At its core, queue is a collection of elements with following operations.</p>
+    <ol>
+      <li>
+        <b>Enqueue: </b> Adding an element to the back of the queue.
+      </li>
+      <li>
+        <b>Dequeue: </b> Removing the element from the front of the queue.
+      </li>
+      <li>
+        <b>Front: </b> Get the element at the front.
+      </li>
+      <li>
+        <b>Rear or (Back): </b> Get the element at the rear.
+      </li>
+      <li>
+        <b>isEmpty: </b> Check if Queue is empty.
+      </li>
+      <li>
+        <b>Size: </b> Determining the number of elements in the queue.
+      </li>
+    </ol>
+  </section>
+
+  <section class="queue__visualization">
+   <h2>Queue Visualizations</h2>
+   <p>Visualizations of enqueue and dequeue operations of queue are as follows.</p>
+    <div class="queue__container">
+    <div class="queue__item zero" style="left: 0;">
+    </div>
+    
+    <div class="queue__item one" style="left: 50px;">
+    </div>
+
+    <div class="queue__item two" style="left: 100px;">
+    </div>
+
+    <div class="queue__item three" style="left: 150px;">
+    </div>
+
+    <div class="queue__item four" style="left: 200px;">
+    </div>
+
+    <div class="queue__item five" style="left: 250px;">
+    </div>
+   </div>
+   <div class="queue__pointers">
+    <div class="queue__front" style="left: -10px;">Front</div>
+    <div class="queue__rear" style="left: -10px;">Rear</div>
+   </div>
+   <div class="queue__controls d-flex align-items-center justify-content-center">
+    <input type="number" class="form-control" placeholder="Element to Enqueue" onchange="handleElInputChange(event)">
+    <button type="button" class="btn btn-primary" onclick="enqueue(this)">Enqueue</button>
+    <button type="button" class="btn btn-primary" onclick="dequeue(this)">Dequeue</button>
+   </div>
+  <div class="queue__controls-error">
+  </div>
+
+
+  </section>
+
+  <section class="queue__implementation">
+    <h2>Queue Implementation in C++</h2>
+    <p>In this post, we will use array as container and implement queue as a class in C++.</p>
+    <p>The Implementation of Queue is as follows.</p>
+    <div class="queue__code-block code-block">
+      <pre>
+      <code>#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;const int MAX_SIZE = 6;&#13;&#13;class Queue {&#13;private:&#13;  int arr[MAX_SIZE];&#13;  int front;&#13;  int rear;&#13;  int elementCount;&#13;&#13;public:&#13;  Queue() {&#13;    front = 0;&#13;    rear = -1;&#13;    elementCount = 0;&#13;  }&#13;&#13;  // method to check if queue is empty.&#13;  bool isEmpty() {&#13;    if(elementCount == 0) {&#13;      return true;&#13;    }&#13;    else {&#13;      return false;&#13;    }&#13;  }&#13;&#13;  // method to check if queue is full.&#13;  bool isFull() {&#13;    if(elementCount == MAX_SIZE) {&#13;      return true;&#13;    } &#13;&#13;    else {&#13;      return false;&#13;    }&#13;  }&#13;&#13;  // method to add item in the queue.&#13;  void enqueue(int element) {&#13;    if(isFull() == true) {&#13;      cout &lt;&lt; &quot;Queue is full.&quot;;&#13;      return;&#13;    }&#13;&#13;    rear = (rear + 1) % MAX_SIZE;&#13;    arr[rear] = element;&#13;&#13;    elementCount++;&#13;  }&#13;&#13;  // method to remove item for the queue. &#13;  int dequeue() {&#13;    if(isEmpty() == true) {&#13;      cout &lt;&lt; &quot;Queue is empty.&quot;;&#13;      return -1;&#13;    }&#13;&#13;    int x = arr[front];&#13;    front = (front + 1) % MAX_SIZE;&#13;&#13;    elementCount--;&#13;&#13;    return x;&#13;  }&#13;&#13;  // method to get peek of the queue.&#13;  int peek() {&#13;    if(isEmpty() == true) {&#13;      cout &lt;&lt; &quot;Queue is empty.&quot;;&#13;        return -1;&#13;    }&#13;&#13;    return arr[front];&#13;  }&#13;};&#13;&#13;int main() {&#13;  Queue q;&#13;&#13;  q.enqueue(10);&#13;  q.enqueue(12);&#13;  q.enqueue(15);&#13;  q.enqueue(14);&#13;&#13;  // Peek of the Queue is 10&#13;  cout &lt;&lt; &quot;Peak of the Queue is &quot;&lt;&lt; q.peek() &lt;&lt; endl; &#13;  // Dequeued element from the queue is 10&#13;  cout &lt;&lt; &quot;Dequeued element from the queue is &quot; &lt;&lt; q.dequeue() &lt;&lt; endl; &#13;  // Dequeued element from the queue is 12&#13;  cout &lt;&lt; &quot;Dequeued element from the queue is &quot;q.dequeue() &lt;&lt; endl;&#13;}</code>
+      </pre>
+    <button class="btn copy-btn" onclick="oncopybuttonclick(this)">
+          <i class="fa-regular fa-copy"></i>
+          <i class="fa-solid fa-check"></i>
+    </button>
+    </div>
+  </section>
+  <section class="queue__types mt-5">
+    <h2>Types of Queues</h2>
+    <p>There are following types of queues.</p>
+    <h3>1. Simple Queue</h3>
+    <p>Simple queue strictly follows the FIFO (First-In-First-Out). Each element is enqueued at the <b>REAR</b> and dequeued from the <b>FRONT</b>.</p>
+    
+    <h3 class="mt-3">2. Priority Queue</h3>
+    <p>A priority queue assigns a priority to each item of queue. Elements are dequeue based on their priority.Higher-priority elements are dequeued before lower-priority ones. Priority queues are useful in scenarios where some tasks are more urgent than others.</p>
+
+    <h3 class="mt-3">3. Circular Queue</h3>
+    <p>In a circular queue, the last item of the queue is connect with first item of the queue. This allows for efficient memory utilization and is often used in scenarios such as scheduling processes in an operating system.</p>
+
+    <h3>4.Double-ended Queue</h3>
+    <p>A Double-ended queue allows elements to be enqueued and dequeued from both ends. This type of queues makes suitable for wide range of applications such as implementing data structures like stack and queue simultaneously.</p>
+  </section>
+
+  <section class="queue__applications mt-5">
+    <h2>Real-World Applications of Queue</h2>
+    <p>Real-World applications of queues are as follows.</p>
+    <h3>1. Print Queue</h3>
+    <p>In a printer job queue, print jobs are processed in the order they are received, following the FIFO principle.</p>
+
+    <h3 class="mt-3">2. Task Scheduling</h3>
+    <p>Operating systems use queues to manage processes and allocate CPU time, ensuring that each process gets its fair share.</p>
+    
+    <h3 class="mt-3">3. Breadth-First Search (BFS)</h3>
+    <p>BFS, a popular graph traversal algorithm, uses queues to explore nodes level by level.</p>
+
+    <h3 class="mt-3">4. Call Center Systems</h3>
+    <p>Call centers use queues to manage incoming calls, ensuring that calls are answered in the order they are received.</p>
+
+    <h3 class="mt-3">5. Traffic Management</h3>
+    <p>Traffic signal systems use queues to control the flow of vehicles at intersections, ensuring fair and efficient traffic management.</p>
+  </section>
+
+  <section class="queue__conclusion">
+    <h2>Conclusion</h2>
+    <p>Queues are a fundamental concept in computer science, with a lot of applications in various domains. Understanding the FIFO principle and the basic operations of enqueue and dequeue provides the foundation for implementing and solving complex problems efficiently. Whether you're managing processes in an operating system or organizing tasks in your to-do list application, queues are an essential tool in your software development toolkit.</p>
+    <p>Thanks for reading, have a nice day.</p>
+  </section>
+</div>
+{{end}}
+
+{{define "js"}}
+  <script src="/static/js/queue.js"></script>
+{{end}}

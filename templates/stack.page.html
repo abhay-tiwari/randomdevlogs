@@ -104,10 +104,10 @@
     <p>We will define max size of stack globally and create a stack class.</p>
     <div class="stack__code-block code-block">
           <pre>
-      <code>#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;// max size of stack&#13;const int MAX_SIZE = 6;&#13;&#13;class Stack {&#13;private:&#13;  int stack[MAX_SIZE];&#13;  // top of the stack.&#13;  int top;&#13;&#13;public:&#13;  Stack() {&#13;    top = -1;&#13;  }&#13;};
+      <code>#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;// max size of stack&#13;const int max_size = 6;&#13;&#13;class stack {&#13;private:&#13;  int stack[max_size];&#13;  // top of the stack.&#13;  int top;&#13;&#13;public:&#13;  stack() {&#13;    top = -1;&#13;  }&#13;};
       </code>
     </pre>
-        <button class="btn copy-btn" onclick="onCopyButtonClick(this)">
+        <button class="btn copy-btn" onclick="oncopybuttonclick(this)">
           <i class="fa-regular fa-copy"></i>
           <i class="fa-solid fa-check"></i>
     </button>
@@ -118,7 +118,7 @@
     <p>Push Operation add an element on top of the stack if stack is not full. After adding push method to <b>Stack</b> class C++ code looks as follows:</p>
     <div class="stack__code-block code-block">
       <pre>
-      <code>#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;// max size of stack&#13;const int MAX_SIZE = 6;&#13;&#13;class Stack {&#13;private:&#13;  int stack[MAX_SIZE];&#13;  // top of the stack.&#13;  int top;&#13;&#13;public:&#13;  Stack() {&#13;    top = -1;&#13;  }&#13;&#13;  // method to check if stack is full.&#13;  bool isFull() {&#13;    return top == MAX_SIZE - 1;&#13;  }&#13;&#13;  // method to push element in stack.&#13;  void push(int element) {&#13;    if(isFull() == true) {&#13;      cout &lt;&lt; &quot;Stack is full.&quot; &lt;&lt; endl;&#13;      return;&#13;    }&#13;    top++;&#13;    stack[top] = element;&#13;  }&#13;};</code>
+      <code>#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;const int MAX_SIZE = 6;&#13;&#13;class Queue {&#13;private:&#13;  int arr[MAX_SIZE];&#13;  int front;&#13;  int rear;&#13;  int elementCount;&#13;&#13;public:&#13;  Queue() {&#13;    front = 0;&#13;    rear = -1;&#13;    elementCount = 0;&#13;  }&#13;&#13;  // method to check if queue is empty.&#13;  bool isEmpty() {&#13;    if(elementCount == 0) {&#13;      return true;&#13;    }&#13;    else {&#13;      return false;&#13;    }&#13;  }&#13;&#13;  // method to check if queue is full.&#13;  bool isFull() {&#13;    if(elementCount == MAX_SIZE) {&#13;      return true;&#13;    } &#13;&#13;    else {&#13;      return false;&#13;    }&#13;  }&#13;&#13;  // method to add item in the queue.&#13;  void enqueue(int element) {&#13;    if(isFull() == true) {&#13;      cout &lt;&lt; &quot;Queue is full.&quot;;&#13;      return;&#13;    }&#13;&#13;    rear = (rear + 1) % MAX_SIZE;&#13;    arr[rear] = element;&#13;&#13;    elementCount++;&#13;  }&#13;&#13;  // method to remove item for the queue. &#13;  int dequeue() {&#13;    if(isEmpty() == true) {&#13;      cout &lt;&lt; &quot;Queue is empty.&quot;;&#13;      return -1;&#13;    }&#13;&#13;    int x = arr[front];&#13;    front = (front + 1) % MAX_SIZE;&#13;&#13;    elementCount--;&#13;&#13;    return x;&#13;  }&#13;&#13;  // method to get peek of the queue.&#13;  int peek() {&#13;    if(isEmpty() == true) {&#13;      cout &lt;&lt; &quot;Queue is empty.&quot;;&#13;        return -1;&#13;    }&#13;&#13;    return arr[front];&#13;  }&#13;};&#13;&#13;int main() {&#13;  Queue q;&#13;&#13;  q.enqueue(10);&#13;  q.enqueue(12);&#13;  q.enqueue(15);&#13;  q.enqueue(14);&#13;&#13;  // Peek of the Queue is 10&#13;  cout &lt;&lt; &quot;Peak of the Queue is &quot;&lt;&lt; q.peek() &lt;&lt; endl; &#13;  &#13;  // Dequeued element from the queue is 10&#13;  cout &lt;&lt; &quot;Dequeued element from the queue is &quot; &lt;&lt; q.dequeue() &lt;&lt; endl; &#13;  // Dequeued element from the queue is 12&#13;  cout &lt;&lt; &quot;Dequeued element from the queue is &quot;q.dequeue() &lt;&lt; endl;&#13;}</code>
     </pre>
     <button class="btn copy-btn" onclick="onCopyButtonClick(this)">
           <i class="fa-regular fa-copy"></i>
