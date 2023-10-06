@@ -12,6 +12,15 @@ body {
     color: #EEE !important;
 }
 
+a {
+  color: #FF6B6B;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .navbar {
   height: 60px;
 }

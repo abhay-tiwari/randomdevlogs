@@ -1,17 +1,134 @@
 {{template "base" .}}
 
 {{define "meta"}}
-
+<title>Recursive Postorder Traversal in CPP - Random Devlogs</title>
+<meta name="description" content="Binary Tree is a fundamental data structure in computer science and used to store and get data efficiently. Tree Traversal is an important operation while working with a Binary Tree. Recursive Postorder Traversal is a popular tree traversal algorithm."/>
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Recursive Postorder Traversal in CPP - Random Devlogs">
+<meta property="og:description" content="Binary Tree is a fundamental data structure in computer science and used to store and get data efficiently. Tree Traversal is an important operation while working with a Binary Tree. Recursive Postorder is a popular tree traversal algorithm.">
+<meta property="og:url" content="https://randomdevlogs.com/data-structures/recursive-postorder-traversal">
+<meta property="og:site_name" content="Random Devlogs">
 {{end}}
 
 {{define "css"}}
-
+<link rel="stylesheet" href="/static/css/recursive-postorder-traversal.css">
 {{end}}
 
 {{define "content"}}
-post order trvaersal
+<div class="postorder blog-container text-white mt-5 p-3" id="postorder">
+  <section class="postorder__introduction">
+    <h2>Postorder Travesal of Binary Tree using Recursion</h2>
+    <p>Binary Tree is a fundamental data structure in computer science and used to store and get data efficiently. Tree Traversal is an important operation while working with a Binary Tree.</p>
+    <p>There are following three methods of Tree Traversal.</p>
+    <ul>
+      <li>
+        <a href="/data-structures/recursive-preorder-traversal">
+           Preorder Traversal
+        </a>
+      </li>
+      <li>
+        <a href="/data-structures/recursive-inorder-traversal">
+           Inorder Traversal
+        </a>
+      </li>
+      <li>
+        <a href="/data-structures/recursive-postorder-traversal">
+           Postorder Traversal
+        </a>
+      </li>
+    </ul>
+
+    <p>In this blog, we will explore postorder traversal of a Binary Tree.</p>
+  </section>
+
+  <section class="postorder__basics mt-5">
+    <h2>How Postorder Traversal Works</h2>
+    <p>Step by Step breakdown of Postorder Traversal using recursion is as follows.</p>
+    <ul>
+      <li>Recursively visit left subtree of current node.</li>
+      <li>Recursively visit right subtree of current node.</li>
+      <li>Visit current node.</li>
+    </ul>
+  </section>
+
+  <section class="postorder__visualization mt-5">
+    <h2>Visualization of Postorder Traversal using Recursion</h2>
+    <p>Interactive Visualization of Postorder Traversal using recursion is as follows.</p>
+    <div class="tree">
+     <div class="tree-level tree__level-1">
+      <div class="node one">
+        1
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-2">
+      <div class="node two">
+        2
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+      <div class="node three">
+        3
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-3">
+      <div class="node four">
+        4
+      </div>
+      <div class="node five">
+        5
+      </div>
+      <div class="node six">
+        6
+      </div>
+      <div class="node seven">
+        7
+      </div>
+     </div> 
+    </div>
+    <div class="tree__controls d-flex align-items-center justify-content-center mt-3">
+      <button class="btn btn-primary prev-btn" type="button" onclick="onPrevStep()"><i class="fa-solid fa-angles-left"></i></button>
+      <button class="btn btn-primary next-btn" type="button" onclick="onNextStep()"><i class="fa-solid fa-angles-right"></i></button>
+    </div>
+    <div class="tree__traversal-output">
+      
+    </div>
+  </section>
+
+  <section class="postorder__implementation mt-5">
+    <h2>Postorder Traversal of Binary Tree in C++</h2>
+    <p>C++ implementation of Postorder Traversal using recursion is as follows.</p>
+    <div class="postorder__code-block code-block">
+      <pre>
+        <code>#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;// class to create a tree node&#13;class TreeNode {&#13;public:&#13;  int data;&#13;&#13;  TreeNode *left;&#13;  TreeNode *right;&#13;&#13;  TreeNode(int data) {&#13;    this-&gt;data = data;&#13;    left = NULL;&#13;    right = NULL;&#13;  }&#13;};&#13;&#13;void postorderTraversal(TreeNode *node) {&#13;  // return if current node is NULL&#13;  if(node == NULL) {&#13;    return;&#13;  }&#13;&#13;  // recursively traverse left subtree of current node.&#13;  postorderTraversal(node -&gt; left);&#13;&#13;  // recursively traverse right subtree of current node.&#13;  postorderTraversal(node -&gt; right);&#13;&#13;  // print data of current node.&#13;  cout &lt;&lt; node -&gt; data &lt;&lt; &quot; &quot;;&#13;}&#13;&#13;int main() {&#13;&#13;  // code to create a tree same as given example&#13;  TreeNode *root = new TreeNode(1);&#13;  TreeNode *two = new TreeNode(2);&#13;  TreeNode *three = new TreeNode(3);&#13;  TreeNode *four = new TreeNode(4);&#13;  TreeNode *five = new TreeNode(5);&#13;  TreeNode *six = new TreeNode(6);&#13;  TreeNode *seven = new TreeNode(7);&#13;&#13;  root -&gt; left = two;&#13;  root -&gt; right = three;&#13;&#13;  two -&gt; left = four;&#13;  two -&gt; right = five;&#13;&#13;  three -&gt; left = six;&#13;  three -&gt; right = seven;&#13;  &#13;  postorderTraversal(root);&#13;}&#13;</code>
+      </pre>
+    <button class="btn copy-btn" onclick="onCopyButtonClick(this)">
+          <i class="fa-regular fa-copy"></i>
+          <i class="fa-solid fa-check"></i>
+    </button>
+    </div>
+  </section>
+
+  <section class="postorder__complexity mt-5">
+    <h2>Time and Space Complexity of Postorder Traversal</h2>
+    <p>The time complexity of the recursive postorder traversal is <b>O(n)</b>, where n is the number of nodes in the binary tree. This is because we visit each node once and perform constant time operations at each node.</p>
+    <p>Space Complexity of the recursion postorder traversal is <b>O(1)</b> since we are not using any additional space.</p>
+  </section>
+
+  <section class="postorder__conclusion mt-5">
+    <h2>Conclusion</h2>
+    <p>In this blog, we explored recusive implementation of postorder traversal in binary tree. Postorder Traversal is a useful technique for processing tree-related algorithm. Understanding how to implement it recursively is fundamental skill of any programmer working with binary tree.</p>
+    <p>Thanks for reading and have a nice day.</p>
+  </section>
+</div>
+
 {{end}}
 
 {{define "js"}}
-
+<script src="/static/js/recursive-postorder-traversal.js">
+</script>
 {{end}}
