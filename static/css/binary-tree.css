@@ -1,0 +1,281 @@
+.tree {
+  height: 250px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tree-level {
+  margin-top: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.tree__level-1 {
+  height: 50px;
+}
+
+.tree__level-2 {
+  height: 50px;
+}
+
+.tree__level-3 {
+  height: 50px;
+}
+
+.node {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #FF6B6B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF6B6B;
+  position: absolute;
+  transition: all 0.25s;
+}
+
+.edge-1 {
+  position: absolute;
+}
+
+.edge-2 {
+  position: absolute;
+}
+
+.one {
+  left: calc(50% - 25px);
+}
+
+.one .edge-1 {
+  height: 85.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(45deg);
+  top: 49%;
+  left: -59%;
+}
+
+.one .edge-2 {
+  height: 85.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(135deg);
+  top: 49%;
+  left: 157%;
+}
+
+.two {
+  left: calc(25% - 25px);
+}
+
+.two .edge-1 {
+  height: 69.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(45deg);
+  top: 66%;
+  left: -37%;
+}
+
+.two .edge-2 {
+  height: 61.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(135deg);
+  top: 77%;
+  left: 115%;
+}
+
+.three .edge-1 {
+  height: 60.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(45deg);
+  top: 79%;
+  left: -18%;
+}
+
+.three .edge-2 {
+  height: 68.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(135deg);
+  top: 70%;
+  left: 132%;
+}
+
+.edge-1:after {
+  content: '';
+  height: 0;
+  top: 0;
+  left: 0;
+  width: 1px;
+  position: absolute;
+  background: #FFF;
+  transition: all 0.25s;
+}
+
+.edge-2:after {
+  content: '';
+  height: 0;
+  bottom: 0;
+  width: 1px;
+  position: absolute;
+  background: #FFF;
+  transition: all 0.25s;
+}
+
+.three {
+  left: calc(75% - 25px);
+}
+
+.four {
+  left: 0;
+}
+
+.five {
+  left: 32%;
+}
+
+.six {
+  left: 55%;
+}
+
+.seven {
+  left: calc(100% - 50px);
+}
+
+.root-pointer {
+  position: absolute;
+  top: 6px;
+  left: 150px;
+}
+
+.root-pointer span {
+  white-space: pre;
+}
+
+.root-pointer:after {
+  content: '';
+  position: absolute;
+  width: 78px;
+  left: -93px;
+  height: 1px;
+  top: 13px;
+  background-color: #FF6B6B;
+}
+
+.root-pointer:before {
+  content: "";
+  border-top: 8px solid transparent;
+  border-left: 10px solid #FF6B6B;
+  border-bottom: 8px solid transparent;
+  right: 95px;
+  top: 5px;
+  position: absolute;
+}
+
+.leaf-node {
+  position: absolute;
+  top: -12px;
+  left: 100px;
+}
+
+.leaf-node {
+  white-space: pre;
+}
+
+.leaf-node:after {
+  content: '';
+  position: absolute;
+  width: 78px;
+  left: -43px;
+  height: 1px;
+  top: 36px;
+  background-color: #FF6B6B;
+}
+
+.leaf-node:before {
+  content: "";
+  border-top: 8px solid transparent;
+  border-left: 10px solid #FF6B6B;
+  border-bottom: 8px solid transparent;
+  right: 98px;
+  top: 28px;
+  position: absolute;
+}
+
+.parent-node {
+  position: absolute;
+  top: -12px;
+  left: -275px;
+}
+
+.parent-node {
+  white-space: pre;
+}
+
+.parent-node:after {
+  content: '';
+  position: absolute;
+  width: 78px;
+  left: 175px;
+  height: 1px;
+  top: 36px;
+  background-color: #FF6B6B;
+}
+
+.parent-node:before {
+  content: "";
+  border-top: 8px solid transparent;
+  border-left: 10px solid #FF6B6B;
+  border-bottom: 8px solid transparent;
+  right: -100px;
+  top: 28px;
+  position: absolute;
+}
+
+.child-node {
+  position: absolute;
+  top: 12px;
+  left: -190px;
+}
+
+.child-node span {
+  white-space: pre;
+}
+
+.child-node:after {
+  content: '';
+  position: absolute;
+  width: 69px;
+  left: 102px;
+  height: 1px;
+  top: 14px;
+  background-color: #FF6B6B;
+}
+
+.child-node:before {
+  content: "";
+  border-top: 8px solid transparent;
+  border-left: 10px solid #FF6B6B;
+  border-bottom: 8px solid transparent;
+  right: -86px;
+  top: 6px;
+  position: absolute;
+}
+
+.binary-tree__details .four, .binary-tree__details .two .edge-1 {
+  display: none;
+}
+
+.binary-tree__full .three .edge-1, .binary-tree__full .three .edge-2 {
+  display: none;
+}
+
+.binary-tree__complete .three .edge-2 {
+  display: none;
+}

@@ -1,0 +1,281 @@
+{{template "base" .}}
+
+{{define "meta"}}
+<title>Binary Tree in CPP - Random Devlogs</title>
+<meta name="description" content="Binary Tree is a fundamental data structure in computer science and has range of applications in various domains such as data storage and artificial intellegence. In this blog, we will learn about binary tree, it's structure, properties and practical uses."/>
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Binary Tree in CPP">
+<meta property="og:description" content="Binary Tree is a fundamental data structure in computer science and has range of applications in various domains such as data storage and artificial intellegence. In this blog, we will learn about binary tree, it's structure, properties and practical uses.">
+<meta property="og:url" content="https://randomdevlogs.com/data-structures/binary-tree">
+<meta property="og:site_name" content="Random Devlogs">
+{{end}}
+
+{{define "css"}}
+<link rel="stylesheet" href="/static/css/binary-tree.css">
+{{end}}
+
+{{define "content"}}
+<div id="binary-tree" class="binary-tree blog-container mt-5 text-white">
+  <section class="binary-tree__introduction">
+    <h2>What is Binary Tree?</h2>
+    <p>Binary Tree is a fundamental data structure in computer science and has range of applications in various domains such as data storage and artificial intellegence. In this blog, we will learn about binary tree, it's structure, properties and practical uses.</p>
+    <p>Binary Tree is non-linear data structure in which each node at most two children (left child and right child). The topmost node in the binary tree is called the root and node with no children are leaves. Key Terminology of binary tree is as follows.</p>
+
+    <ul>
+      <li><b>Node: </b>Each element within the binary tree.</li>
+      <li><b>Root: </b>The topmost node in the binary tree.</li>
+      <li><b>Parent: </b>A node that has one or more child nodes.</li>
+      <li><b>Leaf: </b>A node that has no children.</li>
+      <li><b>Subtree: </b>A portion of a tree that is itself a binary tree.</li>
+      <li><b>Depth: </b>The length of the path from root to a node.</li>
+      <li><b>Height:</b> The length of the longest path from a node to a leaf.</li>
+    </ul>
+  </section>
+
+  <section class="binary-tree__details mt-5">
+    <h2>Binary Tree Example</h2>
+    <p>Example of a binary tree is as follows.</p>
+    <div class="tree">
+     <div class="tree-level tree__level-1">
+      <div class="node one">
+        1
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+        <div class="root-pointer">
+        <span>Root Node</span>
+        </div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-2">
+      <div class="node two">
+        2
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+        <div class="parent-node">
+          <span>Parent Node</span>
+        </div>
+      </div>
+      <div class="node three">
+        3
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-3">
+      <div class="node four">
+        4
+      </div>
+      <div class="node five">
+        5
+        <div class="child-node">
+          <span>Child Node</span>
+        </div>
+      </div>
+      <div class="node six">
+        6
+      </div>
+      <div class="node seven">
+        7
+        <div class="leaf-node">
+          <span>Leaf Node</span>
+        </div>
+      </div>
+     </div> 
+    </div>
+  </section>
+
+  <section class="binary-tree__types mt-5">
+    <h2>Types of Binary Tree</h2>
+    <p>Types of binary tree are as follows.</p>
+
+    <div class="binary-tree__full">
+      <h3>1. Full Binary Tree</h3>
+      <p>In a full binary tree, each node has either 0 or 2 children. This structure ensures that every level of the tree is completely filled except possibly for the last level, which is filled from left to right. Example of full binary tree is as follows.</p>
+    <div class="tree">
+     <div class="tree-level tree__level-1">
+      <div class="node one">
+        1
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-2">
+      <div class="node two">
+        2
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+      <div class="node three">
+        3
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-3">
+      <div class="node four">
+        4
+      </div>
+      <div class="node five">
+        5
+      </div>
+     </div> 
+    </div>
+    </div>
+    <div class="binary-tree__complete">
+      <h3>2. Complete Binary Tree</h3>
+      <p>A complete binary tree is a special case of a binary tree in which all levels are completely filled except possibly for the last level. In the last level, nodes are filled from left to right. Complete binary trees are often used in heap data structures. Example of complete binary tree is as follows. </p>
+    <div class="tree">
+     <div class="tree-level tree__level-1">
+      <div class="node one">
+        1
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-2">
+      <div class="node two">
+        2
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+      <div class="node three">
+        3
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-3">
+      <div class="node four">
+        4
+      </div>
+      <div class="node five">
+        5
+      </div>
+      <div class="node six">
+        6
+      </div>
+     </div> 
+    </div>
+    </div>
+    <div class="binary-tree__perfect">
+      <h3>3. Perfect Binary Tree</h3>
+      <p>A perfect binary tree is a full binary tree where all leaf nodes are at the same level. This means that all levels of the tree are completely filled. Example of perfect binary tree is as follows.</p>
+    <div class="tree">
+     <div class="tree-level tree__level-1">
+      <div class="node one">
+        1
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-2">
+      <div class="node two">
+        2
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+      <div class="node three">
+        3
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-3">
+      <div class="node four">
+        4
+      </div>
+      <div class="node five">
+        5
+      </div>
+      <div class="node six">
+        6
+      </div>
+      <div class="node seven">
+        7
+      </div>
+     </div> 
+    </div>
+    </div>
+  </section>
+
+  <section class="binary-tree__implementation">
+    <h2>Binary Tree Implementation</h2>
+    <p>Binary Tree implementation using C++ classes is as follows.</p>
+    <div class="binary-tree__code-block code-block">
+    <pre>
+    <code>// class to create a tree node.&#13;class TreeNode {&#13;public:&#13;  int data;&#13;&#13;  // declaration of left and right child node pointers.&#13;  TreeNode *left;&#13;  TreeNode *right;&#13;&#13;  // constructor to create a tree node.&#13;  TreeNode(int data) {&#13;    this-&gt;data = data;&#13;    left = NULL;&#13;    right = NULL;&#13;  }&#13;};</code>
+    </pre>
+    <button class="btn copy-btn" onclick="onCopyButtonClick(this)">
+          <i class="fa-regular fa-copy"></i>
+          <i class="fa-solid fa-check"></i>
+    </button>
+    </div>
+  </section>
+
+  <section class="binary-tree__traversal mt-5">
+    <h2>Binary Tree Traversal</h2>
+    <p>Binary Tree traversal is process of visiting each node in a tree exactly once. There are three methods of traversing binary tree.</p>
+    <div class="binary-tree__inorder">
+      <h3>
+        <a href="/data-structures/recursive-inorder-traversal">
+          1. Inorder Traversal
+        </a>
+      </h3>
+      <p>In Inorder Traversal, nodes are visited in the order left-child, parent, right-child. In a binary search tree (BST), an inorder traversal returns nodes in ascending order.</p>
+    </div>
+
+    <div class="binary-tree__preorder">
+      <h3>
+        <a href="/data-structures/recursive-preorder-traversal">2. Preorder Traversal</a>
+      </h3>
+      <p>In Preorder Traversal, nodes are visited in the order parent, left-child, right-child. Preorder traversal is often used to create a copy of the tree.</p>
+    </div>
+
+    <div class="binary-tree__postorder">
+      <h3>
+        <a href="/data-structures/recursive-postorder-traversal">3. Postorder Traversal</a>
+      </h3>
+      <p> In Postorder Traversal, nodes are visited in the order left-child, right-child, parent. Postorder traversal is useful for deleting nodes from the tree.</p>
+    </div>
+  </section>
+
+  <section class="binary-tree__applications mt-5">
+    <h2>Applications of Binary Tree</h2>
+    <p>Binary tree has applications in various fields of computer science.</p>
+
+    <div class="binary-tree__application">
+      <h3>1. Binary Search Trees (BSTs)</h3>
+      <p>Binary search trees are used for efficient data storage and retrieval. They allow for fast insertion, deletion, and searching of elements.</p>
+    </div>
+
+    <div class="binary-tree__application">
+      <h3>2. Expression Trees</h3>
+      <p>Binary trees are used to represent mathematical expressions, making it easy to evaluate and manipulate them.</p>
+    </div>
+
+    <div class="binary-tree__application">
+      <h3>3. File Systems</h3>
+      <p>File systems often use binary tree structures to organize and store files efficiently.</p>
+    </div>
+
+    <div class="binary-tree__application">
+      <h3>4. Game Trees</h3>
+      <p>In game theory and AI, binary trees are used to represent decision trees and game states.</p>
+    </div>
+
+    <div class="binary-tree__application">
+      <h3>Huffman Coding</h3>
+      <p>Binary trees are employed in data compression algorithms like Huffman coding to encode and decode data efficiently.</p>
+    </div>
+  </section>
+
+  <section class="binary-tree__conclusion">
+    <h2>Conclusion</h2>
+    <p>Binary trees are essential data structure in computer science. Understanding their properties and traversal methods is crucial for solving a wide range of problems efficiently. Whether you're working on data storage, algorithm design, or artificial intelligence, binary trees will likely play a significant role in your work, making them a topic worth exploring in depth.</p>
+
+    <p>Thanks for reading, have a nice day.</p>
+  </section>
+</div>
+{{end}}
+

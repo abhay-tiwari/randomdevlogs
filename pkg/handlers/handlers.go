@@ -63,3 +63,7 @@ func (m *Repository) PreOrderTraversalRecursive(w http.ResponseWriter, r *http.R
 func (m *Repository) PostOrderTraversalRecursive(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "recursive-postorder-traversal.page.html", &models.TemplateData{})
 }
+
+func (m *Repository) BinaryTree(w http.ResponseWriter, r *http.Request) {
+  render.RenderTemplate(w, "binary-tree.page.html", &models.TemplateData{})
+}
