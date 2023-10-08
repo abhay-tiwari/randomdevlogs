@@ -279,3 +279,9 @@
 .binary-tree__complete .three .edge-2 {
   display: none;
 }
+
+@media screen and (max-width: 768px) {
+  .parent-node, .child-node, .leaf-node, .root-pointer {
+    display: none;
+  }
+}
