@@ -29,6 +29,7 @@ func routes(app *config.AppConfig) http.Handler {
 		r.Get("/recursive-preorder-traversal", handlers.Repo.PreOrderTraversalRecursive)
 		r.Get("/recursive-postorder-traversal", handlers.Repo.PostOrderTraversalRecursive)
 		r.Get("/binary-tree", handlers.Repo.BinaryTree)
+		r.Get("/full-binary-tree", handlers.Repo.FullBinaryTree)
 		r.Get("/", handlers.Repo.DataStructures)
 	})
 
