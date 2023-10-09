@@ -71,3 +71,7 @@ func (m *Repository) BinaryTree(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) FullBinaryTree(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "full-binary-tree.page.html", &models.TemplateData{})
 }
+
+func (m *Repository) CompleteBinaryTree(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "complete-binary-tree.page.html", &models.TemplateData{})
+}
