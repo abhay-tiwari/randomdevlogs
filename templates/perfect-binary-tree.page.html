@@ -1,0 +1,273 @@
+{{template "base" .}}
+
+{{ define "meta" }}
+<title>Perfect Binary Tree in CPP - Random Devlogs</title>
+<meta name="description" content="A Perfect Binary Tree is a type of a binary tree in which all internal nodes have exactly two childrens and all leaf nodes are at the same level i.e. Every level of binary tree is completely filled with nodes."/>
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perfect Binary Tree in CPP - Random Devlogs">
+<meta property="og:description" content="A Perfect Binary Tree is a type of a binary tree in which all internal nodes have exactly two childrens and all leaf nodes are at the same level i.e. Every level of binary tree is completely filled with nodes.">
+<meta property="og:url" content="https://randomdevlogs.com/data-structures/perfect-binary-tree">
+<meta property="og:site_name" content="Random Devlogs">
+{{ end }}
+
+{{ define "css" }}
+<style>
+.tree {
+  height: 250px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tree-level {
+  margin-top: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.tree__level-1 {
+  height: 50px;
+}
+
+.tree__level-2 {
+  height: 50px;
+}
+
+.tree__level-3 {
+  height: 50px;
+}
+
+.node {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #FF6B6B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF6B6B;
+  position: absolute;
+  transition: all 0.25s;
+}
+
+.edge-1 {
+  position: absolute;
+}
+
+.edge-2 {
+  position: absolute;
+}
+
+.one {
+  left: calc(50% - 25px);
+}
+
+.one .edge-1 {
+  height: 85.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(45deg);
+  top: 49%;
+  left: -59%;
+}
+
+.one .edge-2 {
+  height: 85.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(135deg);
+  top: 49%;
+  left: 157%;
+}
+
+.two {
+  left: calc(25% - 25px);
+}
+
+.two .edge-1 {
+  height: 69.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(45deg);
+  top: 66%;
+  left: -37%;
+}
+
+.two .edge-2 {
+  height: 61.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(135deg);
+  top: 77%;
+  left: 115%;
+}
+
+.three .edge-1 {
+  height: 60.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(45deg);
+  top: 79%;
+  left: -18%;
+}
+
+.three .edge-2 {
+  height: 68.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(135deg);
+  top: 70%;
+  left: 132%;
+}
+
+.edge-1:after {
+  content: '';
+  height: 0;
+  top: 0;
+  left: 0;
+  width: 1px;
+  position: absolute;
+  background: #FFF;
+  transition: all 0.25s;
+}
+
+.edge-2:after {
+  content: '';
+  height: 0;
+  bottom: 0;
+  width: 1px;
+  position: absolute;
+  background: #FFF;
+  transition: all 0.25s;
+}
+
+.three {
+  left: calc(75% - 25px);
+}
+
+.four {
+  left: 0;
+}
+
+.five {
+  left: 32%;
+}
+
+.six {
+  left: 55%;
+}
+
+.seven {
+  left: calc(100% - 50px);
+}
+
+</style>
+{{ end }}
+
+{{ define "content" }}
+<div class="perfect-binary-tree mt-5 text-white blog-container" id="perfect-binary-tree">
+  <section class="perfect-binary-tree__introduction">
+    <h2>What is Perfect Binary Tree?</h2>
+    <p>A Perfect Binary Tree is a type of a binary tree in which all internal nodes have exactly two childrens and all leaf nodes are at the same level i.e. Every level of binary tree is completely filled with nodes.</p>
+    <p>In this blog post, we will learn about Perfect Binary Tree, it's properties and applications.</p>
+    <p>Example of Perfect Binary Tree is as follows.</p>
+
+    <div class="tree">
+     <div class="tree-level tree__level-1">
+      <div class="node one">
+        1
+        <div class="edge-1">
+        </div>
+        <div class="edge-2">
+        </div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-2">
+      <div class="node two">
+        2
+        <div class="edge-1">
+        </div>
+        <div class="edge-2">
+        </div>
+      </div>
+      <div class="node three">
+        3
+        <div class="edge-1">
+        </div>
+        <div class="edge-2">
+        </div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-3">
+      <div class="node four">
+        4
+      </div>
+      <div class="node five">
+        5
+      </div>
+      <div class="node six">
+        6
+      </div>
+      <div class="node seven">
+        7
+      </div>
+     </div> 
+    </div>
+  </section>
+
+  <section class="perfect-binary-tree__implementation mt-5">
+    <h2>C++ Function to Check if a Binary Tree is Perfect Binary Tree</h2>
+    <p>C++ Function to check if a binary tree is perfect binary tree is as follows.</p>
+    <div class="perfect-binary-tree__code-block code-block">
+    <pre>
+    <code>#include&lt;iostream&gt;&#13;&#13;using namespace std;&#13;&#13;// class for creating a tree node.&#13;class TreeNode {&#13;public:&#13;  int val;&#13;  TreeNode *left;&#13;  TreeNode *right;&#13;&#13;  TreeNode(int val) {&#13;    this -&gt; val = val;&#13;  }&#13;};&#13;&#13;int getDepth(TreeNode* node) {&#13;  int depth = 0;&#13;&#13;  while(node != NULL) {&#13;    depth += 1;&#13;    node = node -&gt; left;&#13;  }&#13;&#13;  return depth;&#13;}&#13;&#13;int isPerfectBinaryTree(TreeNode* root, int level, int depth) {&#13;&#13;  // return true if node is null.&#13;  if (root == NULL) {&#13;    return true;&#13;  }&#13;&#13;  // if left and right nodes are null.&#13;  // if current level and depth of tree is same, tree is perfect binary tree.&#13;  if(root -&gt; left == NULL &amp;&amp; root -&gt; right == NULL) {&#13;    return level == depth;&#13;  }&#13;&#13;  // if both child nodes are present, recusively call isPerfectBinaryTree&#13;  // for left and right nodes of current node.&#13;  if(root -&gt; left != NULL &amp;&amp; root -&gt; right != NULL) {&#13;    return (isPerfectBinaryTree(root -&gt; left, level + 1, depth) &amp;&amp; &#13;              isPerfectBinaryTree(root -&gt; right, level + 1, depth));&#13;  }&#13;&#13;  return false;&#13;}&#13;&#13;int main() {&#13;  &#13;  TreeNode* root = new TreeNode(1);&#13;&#13;  TreeNode* two = new TreeNode(2);&#13;  TreeNode* three = new TreeNode(3);&#13;&#13;  TreeNode* four = new TreeNode(4);&#13;  TreeNode* five = new TreeNode(5);&#13;  TreeNode* six = new TreeNode(6);&#13;  TreeNode* seven = new TreeNode(7);&#13;&#13;  root -&gt; left = two;&#13;  root -&gt; right = three;&#13;&#13;  two -&gt; left = four;&#13;  two -&gt; right = five;&#13;  three -&gt; left = six;&#13;  three -&gt; right = seven;&#13;&#13;  int depth = getDepth(root);&#13;&#13;  if(isPerfectBinaryTree(root, 1, depth) == true) {&#13;    cout &lt;&lt; &quot;Binary Tree is Perfect Binary Tree.&quot; &lt;&lt; endl;&#13;  }&#13;&#13;  else {&#13;    cout &lt;&lt; &quot;Binary Tree is not Perfect Binary Tree.&quot; &lt;&lt; endl;&#13;  }&#13;&#13;  return 0;&#13;}</code>
+    </pre>
+        <button class="btn copy-btn" onclick="onCopyButtonClick(this)">
+          <i class="fa-regular fa-copy"></i>
+          <i class="fa-solid fa-check"></i>
+    </button>
+
+    </div>
+  </section>
+
+  <section class="perfect-binary-tree__characteristics mt-5">
+    <h2>Characteristics of Perfect Binary Tree</h2>
+
+    <p>Key Characteristics of Perfect Binary Tree is as follows.</p>
+
+    <h3>1. Balanced Structure</h3>
+    <p>Perfect Binary Trees are Perfectly Balanced, ensuring depth of the tree is minimal, making them ideal for efficient search and retrival operations.</p>
+
+    <h3>2. Node Count</h3>
+    <p>If a perfect binary tree has 'h' levels, it will contain exactly 2^h - 1 nodes. This formula represents the total number of nodes, including both internal nodes and leaves, in a perfect binary tree.</p>
+
+    <h3>3. height</h3>
+    <p> The height of a perfect binary tree with 'n' nodes is log₂(n + 1), emphasizing its logarithmic height relative to the number of nodes.</p>
+
+    <h3>4. Symmetry</h3>
+    <p>Perfect Binary Tree has a symmtric pattern where each node has two children and the tree's shape is uniform and balanced across all levels.</p>
+  </section>
+
+  <section class="perfect-binary-tree__applications">
+    <h2>Applications of Perfect Binary Tree</h2>
+    <p>Applications of Perfect Binary Tree is as follows.</p>
+
+    <h3>1. File Indexing</h3>
+    <p> Perfect binary trees are used in file indexing structures, allowing for rapid searches and retrievals in file systems.</p>
+
+    <h3>2. Memory Allocation</h3>
+    <p>Some memory allocation techniques, such as buddy memory allocation, utilize perfect binary trees to efficiently manage and allocate memory blocks.</p>
+
+    <h3>Cryptography</h3>
+    <p>Perfect binary trees find applications in certain cryptographic algorithms, providing structured approaches for encryption and decryption processes.</p>
+  </section>
+
+  <section class="perfect-binary-tree__conclusion">
+    <h2>Conclusion</h2>
+    <p>Balanced and symmtrical nature of Perfect Binary Trees makes them useful in wide array of applications such as various algorithms and files management.</p>
+    <p>I hope this helps, Thanks for reading and have a nice day.</p>
+  </section>
+</div>
+{{ end }}
