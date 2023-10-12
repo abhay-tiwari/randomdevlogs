@@ -32,6 +32,7 @@ func routes(app *config.AppConfig) http.Handler {
 		r.Get("/full-binary-tree", handlers.Repo.FullBinaryTree)
 		r.Get("/complete-binary-tree", handlers.Repo.CompleteBinaryTree)
 		r.Get("/perfect-binary-tree", handlers.Repo.PerfectBinaryTree)
+		r.Get("/binary-search-tree", handlers.Repo.BinarySearchTree)
 		r.Get("/", handlers.Repo.DataStructures)
 	})
 
