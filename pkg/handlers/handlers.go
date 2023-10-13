@@ -83,3 +83,7 @@ func (m *Repository) PerfectBinaryTree(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) BinarySearchTree(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "binary-search-tree.page.html", &models.TemplateData{})
 }
+
+func (m *Repository) RangeSumBST(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "range-sum-of-bst.page.html", &models.TemplateData{})
+}

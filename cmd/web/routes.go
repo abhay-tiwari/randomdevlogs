@@ -36,6 +36,10 @@ func routes(app *config.AppConfig) http.Handler {
 		r.Get("/", handlers.Repo.DataStructures)
 	})
 
+	mux.Route("/coding-problems", func(r chi.Router) {
+		r.Get("/range-sum-of-bst", handlers.Repo.RangeSumBST)
+	})
+
 	fileServer := http.FileServer(http.Dir("./static/"))
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
 
