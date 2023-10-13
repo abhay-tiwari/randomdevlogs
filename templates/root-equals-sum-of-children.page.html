@@ -1,0 +1,163 @@
+{{template "base" .}}
+
+{{define "meta"}}
+<title>Root Equals Sum of Children | Leetcode # 2236 - Random Devlogs</title>
+<meta name="description" content="In this blog, we will learn how to solve leetcode coding problem Root Equals Sum of Children."/>
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Root Equals Sum of Children | Leetcode # 2236 - Random Devlogs">
+<meta property="og:description" content="In this blog, we will learn how to solve leetcode coding problem Root Equals Sum of Children.">
+<meta property="og:url" content="https://randomdevlogs.com/coding-problems/root-equals-sum-of-children">
+<meta property="og:site_name" content="Random Devlogs">
+{{end}}
+
+{{define "css"}}
+<style>
+.tree {
+  height: 250px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tree-level {
+  margin-top: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.tree__level-1 {
+  height: 50px;
+}
+
+.tree__level-2 {
+  height: 50px;
+}
+
+.node {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #FF6B6B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF6B6B;
+  position: absolute;
+  transition: all 0.25s;
+}
+
+.edge-1 {
+  position: absolute;
+}
+
+.edge-2 {
+  position: absolute;
+}
+
+.one {
+  left: calc(50% - 25px);
+}
+
+.one .edge-1 {
+  height: 85.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(45deg);
+  top: 49%;
+  left: -59%;
+}
+
+.one .edge-2 {
+  height: 85.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(135deg);
+  top: 49%;
+  left: 157%;
+}
+
+.two {
+  left: calc(25% - 25px);
+}
+
+.three {
+  left: calc(75% - 25px);
+}
+
+</style>
+{{end}}
+
+{{define "content"}}
+  <div id="root-equals" class="root-equals blog-container mt-5 text-white">
+    <section class="root-equals__introduction">
+      <h2>Root Equals Sum of Children | Leetcode # 2236</h2>
+      <p>In this blog, we solve interview coding problem Root Equals Sum of Children. We are given the root of Binary Tree which have exactly three nodes (root, left child node, right child node). Our goal is check if sum of left and right nodes is equal to root node value or not.</p>
+      <p>Function should return true if sum of left and right child nodes is equal to root root else return false.</p>
+    </section>
+
+    <section class="root-equals__example mt-5">
+      <h2>Example 1</h2>
+    <div class="tree">
+     <div class="tree-level tree__level-1">
+      <div class="node one">
+        10
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-2">
+      <div class="node two">
+        4
+      </div>
+      <div class="node three">
+        6
+      </div>
+     </div> 
+    </div>
+
+    <p>In above case, function should return <code>true</code> since sum of child nodes (4 + 6 = 10) is equal to root node 10.</p>
+    <h2>Example 2</h2>
+    <div class="tree">
+     <div class="tree-level tree__level-1">
+      <div class="node one">
+        10
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-2">
+      <div class="node two">
+        4
+      </div>
+      <div class="node three">
+        3
+      </div>
+     </div> 
+    </div>
+
+    <p>In above case, function should return <code>false</code> since sum of child nodes (4 + 3 = 7) is not equal to root node 10.</p>
+    </section>
+
+    <section class="root-equals__solution">
+      <h2>Solution</h2>
+      <p>Solution of above problem using C++ is as follows.</p>
+      <pre class="cpp">
+        <code>/**&#13; * Definition for a binary tree node.&#13; * struct TreeNode {&#13; *     int val;&#13; *     TreeNode *left;&#13; *     TreeNode *right;&#13; *     TreeNode() : val(0), left(nullptr), right(nullptr) {}&#13; *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}&#13; *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}&#13; * };&#13; */&#13;&#13;class Solution {&#13;public:&#13;  bool checkTree(TreeNode* root) {&#13;    &#13;    int rootValue = root -&gt; val;&#13;    &#13;    int leftNodeValue = root -&gt; left -&gt; val;&#13;    int rightNodeValue = root -&gt; right -&gt; val;&#13;&#13;    if(rootValue == leftNodeValue + rightNodeValue) {&#13;      return true;&#13;    }&#13;&#13;    else {&#13;      return false;&#13;    }&#13;  }&#13;};</code>
+      </pre>
+    </section>
+
+    <section class="root-equals__explanation mt-5">
+      <h2>Code Explanation</h2>
+      <p>In the <code>checkTree</code> method, we start by extracting the values of the root and its left and right children. Then, we compare whether the sum of the left and right child values is equal to the root's value. If it is, the method returns <code>true</code>, indicating that the tree is a Sum Tree; otherwise, it returns <code>false</code>.</p>
+    </section>
+
+    <section class="root-equals__conclusion mt-5">
+      <h2>Conclusion</h2>
+      <p>In this blog post, we've discussed solution of Root Equals Sum of Children and it's implementation in C++. You can checkout other topics and solutions of coding problems on <a href="/">Random Devlogs</a>.</p>
+      <p>Thanks for reading and have a nice day.</p>
+    </section>
+  </div>
+{{end}}
+

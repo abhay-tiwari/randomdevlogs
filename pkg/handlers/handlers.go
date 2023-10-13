@@ -87,3 +87,7 @@ func (m *Repository) BinarySearchTree(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) RangeSumBST(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "range-sum-of-bst.page.html", &models.TemplateData{})
 }
+
+func (m *Repository) RootEqualsSumofChildren(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "root-equals-sum-of-children.page.html", &models.TemplateData{})
+}
