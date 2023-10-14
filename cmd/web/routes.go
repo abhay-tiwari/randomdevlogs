@@ -39,6 +39,8 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Route("/coding-problems", func(r chi.Router) {
 		r.Get("/range-sum-of-bst", handlers.Repo.RangeSumBST)
 		r.Get("/root-equals-sum-of-children", handlers.Repo.RootEqualsSumofChildren)
+		r.Get("/merge-two-binary-trees", handlers.Repo.MergeTwoBinaryTrees)
+		r.Get("/search-in-binary-search-tree", handlers.Repo.SearchInBinarySearchTree)
 	})
 
 	fileServer := http.FileServer(http.Dir("./static/"))

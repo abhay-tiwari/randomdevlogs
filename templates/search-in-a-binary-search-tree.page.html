@@ -1,0 +1,237 @@
+{{template "base" .}}
+
+{{define "meta"}}
+
+{{end}}
+
+{{define "css"}}
+<style>
+.tree {
+  height: 250px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tree-level {
+  margin-top: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.tree__level-1 {
+  height: 50px;
+}
+
+.tree__level-2 {
+  height: 50px;
+}
+
+.tree__level-3 {
+  height: 50px;
+}
+
+.node {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #FF6B6B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF6B6B;
+  position: absolute;
+  transition: all 0.25s;
+}
+
+.edge-1 {
+  position: absolute;
+}
+
+.edge-2 {
+  position: absolute;
+}
+
+.one {
+  left: calc(50% - 25px);
+}
+
+.one .edge-1 {
+  height: 85.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(45deg);
+  top: 49%;
+  left: -59%;
+}
+
+.one .edge-2 {
+  height: 85.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(135deg);
+  top: 49%;
+  left: 157%;
+}
+
+.two {
+  left: calc(25% - 25px);
+}
+
+.two .edge-1 {
+  height: 69.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(45deg);
+  top: 66%;
+  left: -37%;
+}
+
+.two .edge-2 {
+  height: 61.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(135deg);
+  top: 77%;
+  left: 115%;
+}
+
+.three .edge-1 {
+  height: 60.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(45deg);
+  top: 79%;
+  left: -18%;
+}
+
+.three .edge-2 {
+  height: 68.5px;
+  width: 1px;
+  background: #FF6B6B;
+  transform: rotate(135deg);
+  top: 70%;
+  left: 132%;
+}
+
+.edge-1:after {
+  content: '';
+  height: 0;
+  top: 0;
+  left: 0;
+  width: 1px;
+  position: absolute;
+  background: #FFF;
+  transition: all 0.25s;
+}
+
+.edge-2:after {
+  content: '';
+  height: 0;
+  bottom: 0;
+  width: 1px;
+  position: absolute;
+  background: #FFF;
+  transition: all 0.25s;
+}
+
+.three {
+  left: calc(75% - 25px);
+}
+
+.four {
+  left: 0;
+}
+
+.five {
+  left: 32%;
+}
+
+.six {
+  left: 55%;
+}
+
+.seven {
+  left: calc(100% - 50px);
+}
+
+.tree-label {
+  color: #FF6B6B;
+}
+</style>
+{{end}}
+
+{{define "content"}}
+<div class="bst-search blog-container mt-5 text-white" id="bst-search">
+  <section class="bst-search__introduction">
+    <h2>Search in a Binary Search Tree | Leetcode # 700</h2>
+    <p>Given a BST and an integer value val, the task is to find the node in the BST whose value equals val. If such a node exists, we need to return the subtree rooted at that node; otherwise, we return null.</p>
+    <div class="tree">
+     <div class="tree-level tree__level-1">
+      <div class="node one">
+        4
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-2">
+      <div class="node two">
+        2
+        <div class="edge-1"></div>
+        <div class="edge-2"></div>
+      </div>
+      <div class="node three">
+        5
+        <div class="edge-2"></div>
+      </div>
+     </div> 
+     <div class="tree-level tree__level-3">
+      <div class="node four">
+        1
+      </div>
+      <div class="node five">
+        3
+      </div>
+      <div class="node seven">
+        6
+      </div>
+     </div> 
+    </div>
+
+    <p class="text-center tree-label">Binary Search Tree</p>
+  </section>
+  <section class="bst-search__code">
+    <h2>Solution</h2>
+    <p>Solution of searching a node in BST using C++ as follows.</p>
+    <div class="bst-search__code-block code-block">
+      <pre class="cpp">
+      <code>/**&#13; * Definition for a binary tree node.&#13; * struct TreeNode {&#13; *     int val;&#13; *     TreeNode *left;&#13; *     TreeNode *right;&#13; *     TreeNode() : val(0), left(nullptr), right(nullptr) {}&#13; *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}&#13; *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}&#13; * };&#13; */&#13;class Solution {&#13;public:&#13;  TreeNode* ans;&#13;&#13;  void searchNodeInTree(TreeNode* root, int val) {&#13;    if(root == NULL) {&#13;      return;&#13;    }&#13;&#13;    if(root -&gt; val == val) {&#13;      ans = root;&#13;    }&#13;&#13;    searchNodeInTree(root -&gt; left, val);&#13;    searchNodeInTree(root -&gt; right, val);&#13;  }&#13;&#13;  TreeNode *searchBST(TreeNode* root, int val) {&#13;    searchNodeInTree(root, val);&#13;    return ans;&#13;  }&#13;};</code>
+      </pre>
+    <button class="btn copy-btn" onclick="onCopyButtonClick(this)">
+          <i class="fa-regular fa-copy"></i>
+          <i class="fa-solid fa-check"></i>
+    </button>
+    </div>
+  </section>
+
+  <section class="bst-search__explanation mt-5">
+    <h2>Explanation of Above Solution</h2>
+    <p>The explanation of Search in BST function is as follows.</p>
+
+    <ul>
+      <li>The base case checks if the current node root is NULL. If it is, the function returns, as there are no more nodes to explore in this branch of the tree.</li>
+
+      <li>If the value of the current node root->val matches the target val, it assigns the current node root to the ans variable, indicating that the node with the desired value has been found.</li>
+
+      <li>The function then recursively calls itself to search the left and right subtrees. This is done to explore all nodes in the binary tree.</li>
+    </ul>
+  </section>
+
+  <section class="bst-search__conclusion">
+    <h2>Conclusion</h2>
+    <p>Searching for a specific node in a Binary Search Tree is a common operation in many computer science and programming tasks. This solution provided here offers a C++ solution allowing you to efficiently find a node with a given value and return the subtree rooted at that node. You can adapt this code for various BST-related problems and explore more about BST.</p>
+    <p>Thanks for reading and have a nice day.</p>
+  </section>
+</div>
+{{end}}
