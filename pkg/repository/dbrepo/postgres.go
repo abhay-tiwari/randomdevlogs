@@ -133,24 +133,16 @@ func (m *postgresDBRepo) GetAllBlogs() ([]*models.Blog, error) {
 }
 
 func (m *postgresDBRepo) GetBlogBySlugAndCategory(slug string, category string) (*models.Blog, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	query := "select * from blogs where category=$1"
+	blog := new(models.Blog)
 
-	row, err := m.DB.QueryContext(ctx, query, category)
+	row := m.DB.QueryRowContext(ctx, "SELECT id, title, meta_description, og_title, og_description, slug, content, created_by, category, tags FROM blogs WHERE slug = $1", slug)
 
-	var blog *models.Blog
-
-	if err != nil {
-		log.Println(err)
-		return blog, err
-	}
-
-	defer row.Close()
-
-	err = row.Scan(
+	err := row.Scan(
+		&blog.ID,
 		&blog.Title,
 		&blog.MetaDescription,
 		&blog.OgTitle,
@@ -159,16 +151,14 @@ func (m *postgresDBRepo) GetBlogBySlugAndCategory(slug string, category string) 
 		&blog.Content,
 		&blog.CreatedBy,
 		&blog.Category,
-		&blog.CreatedAt,
-		&blog.UpdatedAt,
 		&blog.Tags,
 	)
+
 	if err != nil {
-		log.Println(err)
-		return blog, err
+		return nil, err
 	}
 
-	return blog, err
+	return blog, nil
 }
 
 func (m *postgresDBRepo) GetBlogsByCategory(category string) ([]*models.Blog, error) {

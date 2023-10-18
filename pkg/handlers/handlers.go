@@ -183,7 +183,15 @@ func (m *Repository) GetBlogBySlugAndCategory(w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	log.Println(blog)
+	data := make(map[string]interface{})
+
+	data["blog"] = blog
+
+	var templateData models.TemplateData
+
+	templateData.Data = data
+
+	render.RenderTemplate(w, r, "blog.page.html", &templateData)
 }
 
 func (m *Repository) GetBlogsByCategory(w http.ResponseWriter, r *http.Request) {
