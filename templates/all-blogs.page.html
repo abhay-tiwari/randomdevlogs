@@ -1,0 +1,15 @@
+{{template "base" .}}
+
+{{define "content"}}
+<div class="text-white">
+  {{$blogs := index .Data "blogs"}}
+
+  <div class="mt-2">
+    {{range $blogs }}
+       {{.Title}}
+       {{.Slug}}
+       {{.Category}}
+    {{end}}
+  </div>
+</div>
+{{end}}

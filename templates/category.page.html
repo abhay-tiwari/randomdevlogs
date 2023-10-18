@@ -1,0 +1,13 @@
+{{template "base" .}}
+
+{{define "content"}}
+<div class="category">
+  {{$blogs := index .Data "blogs"}}
+1
+  {{range $blogs}}
+    <div>
+      {{.Title}}
+    </div>
+  {{end}}
+</div>
+{{end}}

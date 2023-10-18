@@ -1,0 +1,112 @@
+{{template "base" .}}
+
+{{define "meta"}}
+
+{{end}}
+
+{{define "css"}}
+<style>
+.card-body {
+  background: #292F36;
+  border: 1px solid #555;
+  border-radius: 0;
+}
+.form-control {
+  border: 1px solid #555;
+  transition: all 0.25s;
+  background-color: #292F36;
+  color: #ddd;
+}
+
+.form-control:hover, .form-control:focus {
+  border-color:#FF6B6B;
+  background-color: #292F36;
+  color: #ddd;
+}
+
+.text-primary {
+  color: #FF6B6B !important;
+}
+</style>
+{{end}}
+
+{{define "content"}}
+<div class="add-blog container mt-5 text-white" id="add-blog">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card card-body p-4">
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <h2 class="text-uppercase">Add Blog</h2>
+          </div>
+        </div>
+        <form action="/add-blog" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+          <div class="row">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Title</label>
+              <input type="text" class="form-control" name="title" required />
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Meta Description</label>
+              <textarea name="metaDescription" class="form-control" cols="30" rows="10"></textarea>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">OG Title</label>
+              <input type="text" class="form-control" name="ogTitle" required>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Og Description</label>
+              <textarea name="ogDescription" class="form-control" cols="30" rows="10"></textarea>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Slug</label>
+              <input type="text" class="form-control" name="slug" required>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Category</label>
+              <select class="form-control" name="category">
+                <option value="data-structures">Data Structures</option>
+                <option value="algorithms">Algorithms</option>
+                <option value="coding-problems">Coding Problems</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Tags</label>
+              <input type="text" class="form-control" name="tags">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Created By</label>
+              <input type="text" class="form-control" name="createdBy">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Blog Content</label>
+              <input type="file" class="form-control" name="content">
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary">Add Blog</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+{{end}}

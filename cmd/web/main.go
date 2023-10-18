@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/abhay-tiwari/randomdevlogs/pkg/config"
+	"github.com/abhay-tiwari/randomdevlogs/pkg/driver"
 	"github.com/abhay-tiwari/randomdevlogs/pkg/handlers"
 	"github.com/abhay-tiwari/randomdevlogs/pkg/render"
 	"github.com/alexedwards/scs/v2"
@@ -27,6 +28,18 @@ func main() {
 
 	app.Session = session
 
+	log.Println("Connecting to database...")
+
+	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=randomdevlog user=postgres password='your-pass'")
+
+	defer db.SQL.Close()
+
+	if err != nil {
+		log.Fatal("Cannot connect to database.")
+	}
+
+	log.Println("Connected to database.")
+
 	templateCache, err := render.CreateTemplateCache()
 
 	if err != nil {
@@ -36,7 +49,7 @@ func main() {
 	app.TemplateCache = templateCache
 	app.UseCache = false
 
-	repo := handlers.NewRepo(&app)
+	repo := handlers.NewRepo(&app, db)
 
 	handlers.NewHandler(repo)
 

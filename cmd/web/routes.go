@@ -15,12 +15,16 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Use(SessionLoad)
 
 	mux.Get("/", handlers.Repo.Index)
+	mux.Get("/all-blogs", handlers.Repo.GetAllBlogs)
 
-	mux.Route("/algorithms", func(r chi.Router) {
+	mux.Get("/add-blog", handlers.Repo.AddBlog)
+	mux.Post("/add-blog", handlers.Repo.SubmitBlog)
+
+	/*mux.Route("/algorithms", func(r chi.Router) {
 		r.Get("/bubble-sort", handlers.Repo.BubbleSort)
 		r.Get("/linear-search", handlers.Repo.LinearSearch)
 		r.Get("/", handlers.Repo.Algorithms)
-	})
+	})*/
 
 	mux.Route("/data-structures", func(r chi.Router) {
 		r.Get("/stack", handlers.Repo.Stack)
@@ -36,12 +40,17 @@ func routes(app *config.AppConfig) http.Handler {
 		r.Get("/", handlers.Repo.DataStructures)
 	})
 
-	mux.Route("/coding-problems", func(r chi.Router) {
+	/* mux.Route("/coding-problems", func(r chi.Router) {
 		r.Get("/range-sum-of-bst", handlers.Repo.RangeSumBST)
 		r.Get("/root-equals-sum-of-children", handlers.Repo.RootEqualsSumofChildren)
 		r.Get("/merge-two-binary-trees", handlers.Repo.MergeTwoBinaryTrees)
 		r.Get("/search-in-binary-search-tree", handlers.Repo.SearchInBinarySearchTree)
 	})
+	*/
+
+	mux.Get("/{category}/{slug}", handlers.Repo.GetBlogBySlugAndCategory)
+
+	mux.Get("/{category}", handlers.Repo.GetBlogsByCategory)
 
 	fileServer := http.FileServer(http.Dir("./static/"))
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
