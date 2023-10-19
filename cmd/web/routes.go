@@ -20,6 +20,9 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Get("/add-blog", handlers.Repo.AddBlog)
 	mux.Post("/add-blog", handlers.Repo.SubmitBlog)
 
+	mux.Get("/login", handlers.Repo.GetLoginPage)
+	mux.Post("/login", handlers.Repo.Login)
+	mux.Post("/admin", handlers.Repo.Admin)
 	/*	mux.Route("/algorithms", func(r chi.Router) {
 			r.Get("/bubble-sort", handlers.Repo.BubbleSort)
 			r.Get("/linear-search", handlers.Repo.LinearSearch)

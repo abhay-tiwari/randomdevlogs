@@ -110,6 +110,36 @@ func (m *Repository) SearchInBinarySearchTree(w http.ResponseWriter, r *http.Req
 	render.RenderTemplate(w, r, "search-in-a-binary-search-tree.page.html", &models.TemplateData{})
 }
 
+func (m *Repository) GetLoginPage(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, r, "login.page.html", &models.TemplateData{})
+}
+
+func (m *Repository) Login(w http.ResponseWriter, r *http.Request) {
+	_ = m.App.Session.RenewToken(r.Context())
+
+	email := r.Form.Get("email")
+	password := r.Form.Get("password")
+
+	id, _, err := m.DB.Authenticate(email, password)
+
+	if err != nil {
+		log.Println(err)
+		m.App.Session.Put(r.Context(), "error", "Invalid Login")
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+		return
+	}
+
+	m.App.Session.Put(r.Context(), "user_id", id)
+
+	m.App.Session.Put(r.Context(), "flash", "Logged in Successfully")
+
+	http.Redirect(w, r, "/admin", http.StatusSeeOther)
+}
+
+func (m *Repository) Admin(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, r, "admin.page.html", &models.TemplateData{})
+}
+
 func (m *Repository) GetAllBlogs(w http.ResponseWriter, r *http.Request) {
 	blogs, _ := m.DB.GetAllBlogs()
 

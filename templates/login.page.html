@@ -1,0 +1,62 @@
+
+{{template "base" .}}
+
+{{define "meta"}}
+
+{{end}}
+
+{{define "css"}}
+<style>
+.card-body {
+  background: #292F36;
+  border: 1px solid #555;
+  border-radius: 0;
+}
+.form-control {
+  border: 1px solid #555;
+  transition: all 0.25s;
+  background-color: #292F36;
+  color: #ddd;
+}
+
+.form-control:hover, .form-control:focus {
+  border-color:#FF6B6B;
+  background-color: #292F36;
+  color: #ddd;
+}
+
+.text-primary {
+  color: #FF6B6B !important;
+}
+</style>
+{{end}}
+
+{{define "content"}}
+<div class="login container mt-5 text-white" id="login">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card card-body p-4">
+        <form action="/login" method="post">
+          <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+          <div class="row">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-1 text-uppercase">Email</label>
+              <input type="text" class="form-control" name="email" required />
+            </div>
+          </div>
+          <div class="row mt-5">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2 text-uppercase">Password</label>
+              <input type="password" class="form-control" name="password" required />
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+{{end}}

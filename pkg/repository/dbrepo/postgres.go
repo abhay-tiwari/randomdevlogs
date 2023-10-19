@@ -2,6 +2,7 @@ package dbrepo
 
 import (
 	"context"
+	"errors"
 	"log"
 	"time"
 
@@ -9,51 +10,17 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func (m *postgresDBRepo) GetUserById(id int) (models.User, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-
-	defer cancel()
-
-	query := `select id, first_name, last_name, email, password, created_at, updated_at from users where id = $1`
-
-	row := m.DB.QueryRowContext(ctx, query, id)
-
-	var u models.User
-
-	err := row.Scan(&u.ID, &u.FirstName, &u.LastName, &u.Password, &u.Email, &u.CreatedAt, &u.UpdatedAt)
-
-	if err != nil {
-		return u, err
-	}
-
-	return u, nil
-}
-
-func (m *postgresDBRepo) UpdateUser(u models.User) error {
-
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-
-	defer cancel()
-
-	query := `update users set first_name = $1, last_name = $2, email = $3, updated_at=$4`
-
-	_, err := m.DB.ExecContext(ctx, query, u.FirstName, u.LastName, u.Email, u.UpdatedAt)
-
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *postgresDBRepo) Authenticate(email, testPassword string) (int, string, error) {
+func (m *postgresDBRepo) AuthenticateUser(email string, password string) (int, string, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
 	var id int
+
 	var hashedPassword string
 
-	row := m.DB.QueryRowContext(ctx, `select id, password from users where email = $1`, email)
+	query := `select email, password from users where email = $1`
+
+	row := m.DB.QueryRowContext(ctx, query, email)
 
 	err := row.Scan(&id, &hashedPassword)
 
@@ -61,9 +28,11 @@ func (m *postgresDBRepo) Authenticate(email, testPassword string) (int, string, 
 		return id, "", err
 	}
 
-	err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(testPassword))
+	err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 
-	if err != nil {
+	if err == bcrypt.ErrMismatchedHashAndPassword {
+		return 0, "", errors.New("Incorrect password")
+	} else if err != nil {
 		return 0, "", err
 	}
 
