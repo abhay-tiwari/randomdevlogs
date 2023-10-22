@@ -15,14 +15,22 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Use(SessionLoad)
 
 	mux.Get("/", handlers.Repo.Index)
-	mux.Get("/all-blogs", handlers.Repo.GetAllBlogs)
-
-	mux.Get("/add-blog", handlers.Repo.AddBlog)
-	mux.Post("/add-blog", handlers.Repo.SubmitBlog)
 
 	mux.Get("/login", handlers.Repo.GetLoginPage)
 	mux.Post("/login", handlers.Repo.Login)
-	mux.Post("/admin", handlers.Repo.Admin)
+
+	mux.Route("/admin", func(r chi.Router) {
+		r.Get("/all-blogs", handlers.Repo.GetAllBlogs)
+
+		r.Get("/add-blog", handlers.Repo.AddBlog)
+		r.Post("/add-blog", handlers.Repo.SubmitBlog)
+
+		r.Get("/edit-blog/{blogId}", handlers.Repo.EditBlog)
+		r.Post("/edit-blog", handlers.Repo.PostEditBlog)
+
+		r.Post("/delete-blog", handlers.Repo.DeleteBlog)
+	})
+
 	/*	mux.Route("/algorithms", func(r chi.Router) {
 			r.Get("/bubble-sort", handlers.Repo.BubbleSort)
 			r.Get("/linear-search", handlers.Repo.LinearSearch)

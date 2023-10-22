@@ -1,0 +1,101 @@
+{{template "base" .}}
+
+{{define "css"}}
+<style>
+.card-body {
+  background: #292F36;
+  border: 1px solid #555;
+  border-radius: 0;
+}
+.form-control {
+  border: 1px solid #555;
+  transition: all 0.25s;
+  background-color: #292F36;
+  color: #ddd;
+}
+
+.form-control:hover, .form-control:focus {
+  border-color:#FF6B6B;
+  background-color: #292F36;
+  color: #ddd;
+}
+
+.text-primary {
+  color: #FF6B6B !important;
+}
+</style>
+{{end}}
+
+{{define "content"}}
+<div class="edit-blog container mt-5 text-white" id="edit-blog">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card card-body p-4">
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <h2 class="text-uppercase">Edit Blog</h2>
+          </div>
+        </div>
+        <form action="/edit-blog" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+        {{$blog := index .Data "blog"}}
+        {{with $blog}}
+          <div class="row">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Title</label>
+              <input type="text" class="form-control" name="title" value="{{.Title}}" required />
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Meta Description</label>
+              <textarea name="metaDescription" class="form-control" cols="30" rows="10">{{.MetaDescription}}</textarea>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">OG Title</label>
+              <input type="text" class="form-control" name="ogTitle" required value="{{.OgTitle}}">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Og Description</label>
+              <textarea name="ogDescription" class="form-control" cols="30" rows="10">{{.OgDescription}}</textarea>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Slug</label>
+              <input type="text" class="form-control" name="slug" required value="{{.Slug}}">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Tags</label>
+              <input type="text" class="form-control" name="tags" value="{{.Tags}}">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Created By</label>
+              <input type="text" class="form-control" name="createdBy" value="{{.CreatedBy}}">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="title" class="text-primary pb-2">Blog Content</label>
+              <input type="file" class="form-control" name="content">
+            </div>
+          </div>
+          <div class="row mt-4 justify">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary">Edit Blog</button>
+            </div>
+          </div>
+          {{end}}
+        </form>
+    </div>
+  </div>
+  </div>
+{{end}}

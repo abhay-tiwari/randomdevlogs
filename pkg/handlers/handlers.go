@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/abhay-tiwari/randomdevlogs/pkg/config"
 	"github.com/abhay-tiwari/randomdevlogs/pkg/driver"
@@ -123,7 +124,6 @@ func (m *Repository) Login(w http.ResponseWriter, r *http.Request) {
 	id, _, err := m.DB.Authenticate(email, password)
 
 	if err != nil {
-		log.Println(err)
 		m.App.Session.Put(r.Context(), "error", "Invalid Login")
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 		return
@@ -158,6 +158,91 @@ func (m *Repository) AddBlog(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, r, "add-blog.page.html", &models.TemplateData{})
 }
 
+func (m *Repository) EditBlog(w http.ResponseWriter, r *http.Request) {
+	blogId := chi.URLParam(r, "blogId")
+	log.Println("blogId", blogId)
+
+	id, err := strconv.Atoi(blogId)
+
+	if err != nil {
+		log.Println("err is in conversion")
+		log.Println(err)
+		return
+	}
+
+	blog, err := m.DB.GetBlogById(id)
+
+	if err != nil {
+		log.Println("err is in fetch blog")
+		log.Println(err)
+		return
+	}
+
+	data := make(map[string]interface{})
+
+	data["blog"] = blog
+
+	var td models.TemplateData
+	td.Data = data
+
+	render.RenderTemplate(w, r, "edit-blog.page.html", &td)
+}
+
+func (m *Repository) DeleteBlog(w http.ResponseWriter, r *http.Request) {
+	id := r.Form.Get("blogId")
+	blogId, err := strconv.Atoi(id)
+
+	log.Println(blogId)
+
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	m.DB.DeleteBlog(blogId)
+
+	http.Redirect(w, r, "/admin/all-blogs", http.StatusSeeOther)
+}
+
+func (m *Repository) PostEditBlog(w http.ResponseWriter, r *http.Request) {
+	title := r.Form.Get("title")
+	metaDescription := r.Form.Get("metaDescription")
+	ogTitle := r.Form.Get("ogTitle")
+	ogDescription := r.Form.Get("ogDescription")
+	slug := r.Form.Get("slug")
+	category := r.Form.Get("category")
+	tags := r.Form.Get("tags")
+	createdBy := r.Form.Get("createdBy")
+
+	file, _, err := r.FormFile("content")
+
+	if err != nil {
+		return
+	}
+
+	defer file.Close()
+
+	fileContent, err := io.ReadAll(file)
+
+	html := markdown.ToHTML(fileContent, nil, nil)
+
+	blog := models.Blog{
+		Title:           title,
+		MetaDescription: metaDescription,
+		OgTitle:         ogTitle,
+		OgDescription:   ogDescription,
+		Slug:            slug,
+		Category:        category,
+		Tags:            tags,
+		CreatedBy:       createdBy,
+		Content:         template.HTML(html),
+	}
+
+	m.DB.EditBlog(blog)
+
+	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+}
+
 func (m *Repository) SubmitBlog(w http.ResponseWriter, r *http.Request) {
 	title := r.Form.Get("title")
 	metaDescription := r.Form.Get("metaDescription")
@@ -171,8 +256,6 @@ func (m *Repository) SubmitBlog(w http.ResponseWriter, r *http.Request) {
 	file, _, err := r.FormFile("content")
 
 	if err != nil {
-		log.Println("file upload failed")
-		log.Println(err)
 		return
 	}
 

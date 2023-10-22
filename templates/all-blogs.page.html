@@ -1,15 +1,77 @@
 {{template "base" .}}
 
+{{define "css"}}
+<style>
+.btn-link {
+  background: transparent;
+  color: #FF6B6B;
+}
+
+.action-col {
+  width: 150px; 
+  text-align: right; 
+  padding-right: 28px !important;
+}
+
+.category-col {
+  width: 200px;
+}
+
+.delete-blog {
+  display: inline-block;
+}
+
+</style>
+{{end}}
+
 {{define "content"}}
-<div class="text-white">
+<div class="text-white container mt-5">
+  <div class="row mt-3 mb-4 align-items-center">
+    <div class="col-md-6">
+      <h2 class="text-uppercase">All Blogs</h2>
+    </div>
+
+    <div class="col-md-6 d-flex align-items-center justify-content-end">
+      <a class="btn btn-primary" href="/admin/add-blog">Add Blog</a>
+    </div>
+  </div>
+    
+
   {{$blogs := index .Data "blogs"}}
 
   <div class="mt-2">
-    {{range $blogs }}
-       {{.Title}}
-       {{.Slug}}
-       {{.Category}}
+    <table class="table table-dark table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Title</th>
+          <th scope="col" class="category-col">Category</th>
+          <th scope="col" class="action-col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+    {{range $i, $b := $blogs }}
+        <tr>
+          <td style="vertical-align: middle;">{{.ID}}</td>
+          <td style="vertical-align: middle;">{{.Title}}</td>
+          <td style="vertical-align: middle;" class="category-col">{{.Category}}</td>
+          <td class="action-col">
+            <a href="/admin/edit-blog/{{.ID}}" type="button" class="btn btn-link">
+              <i class="fa fa-pencil"></i>
+            </a>
+
+            <form method="post" action="/admin/delete-blog" class="delete-blog">
+              <input type="hidden" name="csrf_token" value="{{$.CSRFToken}}">
+              <input type="hidden" name="blogId" value={{.ID}} />
+              <button type="submit" class="btn btn-link">
+                <i class="fa fa-trash"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
     {{end}}
+      </tbody>
+    </table>
   </div>
 </div>
 {{end}}
