@@ -183,3 +183,24 @@ code {
 .read-more-btn {
   font-size: 0.875rem;
 }
+
+h2.swal2-title {
+  color: #FF6B6B;
+}
+
+.swal2-popup {
+  background: #292f36;
+  border: 1px solid #999;
+}
+
+.swal2-confirm {
+  background-color: #292f36 !important;
+  border: 1px solid #ff6b6b !important;
+  color: #ff6b6b !important;
+  transition: all 0.25s;
+}
+
+.swal2-confirm:hover, .swal2-confirm:focus {
+  background-color: #ff6b6b !important;
+  color: #EEE !important;
+}

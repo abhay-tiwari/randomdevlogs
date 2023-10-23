@@ -9,6 +9,7 @@ import (
 
 	"github.com/abhay-tiwari/randomdevlogs/pkg/config"
 	"github.com/abhay-tiwari/randomdevlogs/pkg/driver"
+	"github.com/abhay-tiwari/randomdevlogs/pkg/forms"
 	"github.com/abhay-tiwari/randomdevlogs/pkg/models"
 	"github.com/abhay-tiwari/randomdevlogs/pkg/render"
 	"github.com/abhay-tiwari/randomdevlogs/pkg/repository"
@@ -112,11 +113,34 @@ func (m *Repository) SearchInBinarySearchTree(w http.ResponseWriter, r *http.Req
 }
 
 func (m *Repository) GetLoginPage(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "login.page.html", &models.TemplateData{})
+	render.RenderTemplate(w, r, "login.page.html", &models.TemplateData{
+		Form: forms.New(nil),
+	})
 }
 
 func (m *Repository) Login(w http.ResponseWriter, r *http.Request) {
 	_ = m.App.Session.RenewToken(r.Context())
+
+	form := forms.New(r.PostForm)
+
+	form.Required("email", "password")
+	form.IsEmail("email", r)
+
+	if !form.Valid() {
+		data := make(map[string]interface{})
+
+		data["user"] = models.User{
+			Email:    r.Form.Get("email"),
+			Password: r.Form.Get("password"),
+		}
+
+		render.RenderTemplate(w, r, "login.page.html", &models.TemplateData{
+			Data: data,
+			Form: form,
+		})
+
+		return
+	}
 
 	email := r.Form.Get("email")
 	password := r.Form.Get("password")
@@ -124,6 +148,7 @@ func (m *Repository) Login(w http.ResponseWriter, r *http.Request) {
 	id, _, err := m.DB.Authenticate(email, password)
 
 	if err != nil {
+		log.Println(err)
 		m.App.Session.Put(r.Context(), "error", "Invalid Login")
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 		return
@@ -133,7 +158,7 @@ func (m *Repository) Login(w http.ResponseWriter, r *http.Request) {
 
 	m.App.Session.Put(r.Context(), "flash", "Logged in Successfully")
 
-	http.Redirect(w, r, "/admin", http.StatusSeeOther)
+	http.Redirect(w, r, "/admin/all-blogs", http.StatusSeeOther)
 }
 
 func (m *Repository) Admin(w http.ResponseWriter, r *http.Request) {
@@ -192,8 +217,6 @@ func (m *Repository) DeleteBlog(w http.ResponseWriter, r *http.Request) {
 	id := r.Form.Get("blogId")
 	blogId, err := strconv.Atoi(id)
 
-	log.Println(blogId)
-
 	if err != nil {
 		log.Println(err)
 		return
@@ -244,6 +267,7 @@ func (m *Repository) PostEditBlog(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) SubmitBlog(w http.ResponseWriter, r *http.Request) {
+	log.Println("submit blog called")
 	title := r.Form.Get("title")
 	metaDescription := r.Form.Get("metaDescription")
 	ogTitle := r.Form.Get("ogTitle")
@@ -256,6 +280,7 @@ func (m *Repository) SubmitBlog(w http.ResponseWriter, r *http.Request) {
 	file, _, err := r.FormFile("content")
 
 	if err != nil {
+		log.Println(err)
 		return
 	}
 
@@ -278,6 +303,7 @@ func (m *Repository) SubmitBlog(w http.ResponseWriter, r *http.Request) {
 	}
 
 	m.DB.AddBlog(blog)
+	log.Println(r.Header.Get("Referer"))
 
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)
 }

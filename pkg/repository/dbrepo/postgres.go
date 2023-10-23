@@ -18,7 +18,7 @@ func (m *postgresDBRepo) Authenticate(email string, password string) (int, strin
 
 	var hashedPassword string
 
-	query := `select email, password from users where email = $1`
+	query := `select id, password from users where email = $1`
 
 	row := m.DB.QueryRowContext(ctx, query, email)
 
