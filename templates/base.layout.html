@@ -38,6 +38,11 @@
 
         <div class="collapse navbar-collapse" id="navbarText">
          <ul class="navbar-nav ms-auto mb-2 mb-lg-2">
+           {{if eq .IsAuthenticated 1}}
+           <li class="nav-item">
+             <a class="nav-link text-uppercase" href="/logout">Logout</a>
+           </li>
+           {{else}}
           <li class="nav-item">
             <a class="nav-link active text-uppercase" href="/">Home</a>
           </li>
@@ -47,6 +52,7 @@
           <li class="nav-item">
             <a class="nav-link text-uppercase" href="/algorithms">Algorithms</a>
           </li>
+          {{end}}
          </ul> 
         </div>
       </div>
@@ -85,8 +91,6 @@
       {{with .Flash }}
       alert("{{.}}", "success")
       {{end}}
-
-
     </script>
     {{block "js" .}}
     {{end}}

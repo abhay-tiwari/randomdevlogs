@@ -1,9 +1,9 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
-	"github.com/abhay-tiwari/randomdevlogs/pkg/helpers"
 	"github.com/justinas/nosurf"
 )
 
@@ -26,8 +26,7 @@ func SessionLoad(next http.Handler) http.Handler {
 
 func Auth(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if !helpers.IsAuthenticated(r) {
-			session.Put(r.Context(), "error", "Login First")
+		if !app.Session.Exists(r.Context(), "user_id") {
 			http.Redirect(w, r, "/login", http.StatusSeeOther)
 		}
 

@@ -148,17 +148,24 @@ func (m *Repository) Login(w http.ResponseWriter, r *http.Request) {
 	id, _, err := m.DB.Authenticate(email, password)
 
 	if err != nil {
-		log.Println(err)
 		m.App.Session.Put(r.Context(), "error", "Invalid Login")
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 		return
 	}
-
+	log.Println("user_id", id)
 	m.App.Session.Put(r.Context(), "user_id", id)
 
-	m.App.Session.Put(r.Context(), "flash", "Logged in Successfully")
+	m.App.Session.Put(r.Context(), "flash", "Logged in Successfully.")
 
 	http.Redirect(w, r, "/admin/all-blogs", http.StatusSeeOther)
+}
+
+func (m *Repository) Logout(w http.ResponseWriter, r *http.Request) {
+	log.Println("logout")
+	_ = m.App.Session.Destroy(r.Context())
+	_ = m.App.Session.RenewToken(r.Context())
+
+	http.Redirect(w, r, "/login", http.StatusSeeOther)
 }
 
 func (m *Repository) Admin(w http.ResponseWriter, r *http.Request) {

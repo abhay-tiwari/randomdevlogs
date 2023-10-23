@@ -19,7 +19,11 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Get("/login", handlers.Repo.GetLoginPage)
 	mux.Post("/login", handlers.Repo.Login)
 
+	mux.Get("/logout", handlers.Repo.Logout)
+
 	mux.Route("/admin", func(r chi.Router) {
+		r.Use(Auth)
+
 		r.Get("/all-blogs", handlers.Repo.GetAllBlogs)
 
 		r.Get("/add-blog", handlers.Repo.AddBlog)
