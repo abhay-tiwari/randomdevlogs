@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -18,7 +20,18 @@ var session *scs.SessionManager
 
 func main() {
 
-	app.InProduction = false
+	inProduction := flag.Bool("production", true, "Application is in production")
+	useCache := flag.Bool("cache", true, "use template cache")
+	dbHost := flag.String("dbhost", "localhost", "Database Host")
+	dbName := flag.String("dbname", "", "Database Name")
+	dbUser := flag.String("dbuser", "", "Database User")
+	dbPassword := flag.String("dbpassword", "", "Database Password")
+	dbPort := flag.String("dbport", "5432", "Database Port")
+	dbSSL := flag.String("dbssl", "disable", "Database SSL settings (disable, prefer, require)")
+
+	flag.Parse()
+
+	app.InProduction = *inProduction
 
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
@@ -30,7 +43,9 @@ func main() {
 
 	log.Println("Connecting to database...")
 
-	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=randomdevlog user=postgres password='your-pass'")
+	connectionString := fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=%s", *dbHost, *dbPort, *dbName, *dbUser, *dbPassword, *dbSSL)
+
+	db, err := driver.ConnectSQL(connectionString)
 
 	defer db.SQL.Close()
 
@@ -47,7 +62,7 @@ func main() {
 	}
 
 	app.TemplateCache = templateCache
-	app.UseCache = false
+	app.UseCache = *useCache
 
 	repo := handlers.NewRepo(&app, db)
 
