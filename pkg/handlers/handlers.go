@@ -152,7 +152,7 @@ func (m *Repository) Login(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 		return
 	}
-	log.Println("user_id", id)
+
 	m.App.Session.Put(r.Context(), "user_id", id)
 
 	m.App.Session.Put(r.Context(), "flash", "Logged in Successfully.")
@@ -161,7 +161,6 @@ func (m *Repository) Login(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) Logout(w http.ResponseWriter, r *http.Request) {
-	log.Println("logout")
 	_ = m.App.Session.Destroy(r.Context())
 	_ = m.App.Session.RenewToken(r.Context())
 
@@ -310,9 +309,10 @@ func (m *Repository) SubmitBlog(w http.ResponseWriter, r *http.Request) {
 	}
 
 	m.DB.AddBlog(blog)
-	log.Println(r.Header.Get("Referer"))
 
-	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+	m.App.Session.Put(r.Context(), "flash", "Blog Added Successfully.")
+
+	http.Redirect(w, r, "/admin/all-blogs", http.StatusSeeOther)
 }
 
 func (m *Repository) GetBlogBySlugAndCategory(w http.ResponseWriter, r *http.Request) {

@@ -53,7 +53,9 @@
     {{range $i, $b := $blogs }}
         <tr>
           <td style="vertical-align: middle;">{{.ID}}</td>
-          <td style="vertical-align: middle;">{{.Title}}</td>
+          <td style="vertical-align: middle;">
+            <a href="/{{.Category}}/{{.Slug}}">{{.Title}}</a>  
+          </td>
           <td style="vertical-align: middle;" class="category-col">{{.Category}}</td>
           <td class="action-col">
             <a href="/admin/edit-blog/{{.ID}}" type="button" class="btn btn-link">

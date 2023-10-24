@@ -49,7 +49,6 @@ func (m *postgresDBRepo) AddBlog(blog models.Blog) error {
 	_, err := m.DB.ExecContext(ctx, statement, blog.Title, blog.MetaDescription, blog.OgTitle, blog.OgDescription, blog.Slug, blog.Content, blog.CreatedBy, blog.Category, blog.Tags, time.Now(), time.Now())
 
 	if err != nil {
-		log.Println(err)
 		return err
 	}
 
