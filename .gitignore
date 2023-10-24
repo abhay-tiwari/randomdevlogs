@@ -5,6 +5,6 @@
 *.dylib
 *.test
 *.out
-.randomdevlogs
+randomdevlogs
 go.work
 database.yml
