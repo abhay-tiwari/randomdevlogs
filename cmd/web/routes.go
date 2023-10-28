@@ -16,6 +16,8 @@ func routes(app *config.AppConfig) http.Handler {
 
 	mux.Get("/", handlers.Repo.Index)
 
+	mux.Get("/sitemap", handlers.Repo.GetSitemap)
+
 	mux.Get("/login", handlers.Repo.GetLoginPage)
 	mux.Post("/login", handlers.Repo.Login)
 

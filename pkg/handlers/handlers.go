@@ -3,6 +3,7 @@ package handlers
 import (
 	"html/template"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
@@ -359,4 +360,16 @@ func (m *Repository) GetBlogsByCategory(w http.ResponseWriter, r *http.Request) 
 	templateData.Data = data
 
 	render.RenderTemplate(w, r, "category.page.html", &templateData)
+}
+
+func (m *Repository) GetSitemap(w http.ResponseWriter, r *http.Request) {
+	fileContent, err := ioutil.ReadFile("sitemap.xml")
+
+	if err != nil {
+		log.Println("Could not read sitemap")
+		return
+	}
+
+	w.Write(fileContent)
+	return
 }
