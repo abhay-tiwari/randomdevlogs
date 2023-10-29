@@ -37,12 +37,12 @@ func routes(app *config.AppConfig) http.Handler {
 		r.Post("/delete-blog", handlers.Repo.DeleteBlog)
 	})
 
-	/*	mux.Route("/algorithms", func(r chi.Router) {
-			r.Get("/bubble-sort", handlers.Repo.BubbleSort)
-			r.Get("/linear-search", handlers.Repo.LinearSearch)
-			r.Get("/", handlers.Repo.Algorithms)
-		})
-	*/
+	mux.Route("/algorithms", func(r chi.Router) {
+		r.Get("/bubble-sort", handlers.Repo.BubbleSort)
+		r.Get("/linear-search", handlers.Repo.LinearSearch)
+		r.Get("/", handlers.Repo.Algorithms)
+	})
+
 	mux.Route("/data-structures", func(r chi.Router) {
 		r.Get("/stack", handlers.Repo.Stack)
 		r.Get("/queue", handlers.Repo.Queue)
@@ -58,8 +58,6 @@ func routes(app *config.AppConfig) http.Handler {
 	})
 
 	mux.Get("/{category}/{slug}", handlers.Repo.GetBlogBySlugAndCategory)
-
-	mux.Get("/{category}", handlers.Repo.GetBlogsByCategory)
 
 	fileServer := http.FileServer(http.Dir("./static/"))
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
