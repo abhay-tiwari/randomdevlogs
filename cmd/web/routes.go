@@ -57,6 +57,8 @@ func routes(app *config.AppConfig) http.Handler {
 		r.Get("/", handlers.Repo.DataStructures)
 	})
 
+	mux.Get("/coding-problems", handlers.Repo.GetCodingProblemsPage)
+
 	mux.Get("/{category}/{slug}", handlers.Repo.GetBlogBySlugAndCategory)
 
 	fileServer := http.FileServer(http.Dir("./static/"))
