@@ -44,16 +44,16 @@
            </li>
            {{else}}
           <li class="nav-item">
-            <a class="nav-link active text-uppercase" href="/">Home</a>
+            <a class="nav-link {{if eq .Active "index"}} active {{end}} text-uppercase" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" href="/data-structures">Data Structures</a>
+            <a class="nav-link {{if eq .Active "data-structures"}} active {{end}} text-uppercase" href="/data-structures">Data Structures</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" href="/algorithms">Algorithms</a>
+            <a class="nav-link {{if eq .Active "algorithms"}} active {{end}} text-uppercase" href="/algorithms">Algorithms</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" href="/coding-problems">Coding Problems</a>
+            <a class="nav-link {{if eq .Active "coding-problems"}} active {{end}} text-uppercase" href="/coding-problems">Coding Problems</a>
           </li>
           {{end}}
          </ul> 

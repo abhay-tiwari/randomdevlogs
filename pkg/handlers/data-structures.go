@@ -8,7 +8,9 @@ import (
 )
 
 func (m *Repository) DataStructures(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "data-structures.page.html", &models.TemplateData{})
+	render.RenderTemplate(w, r, "data-structures.page.html", &models.TemplateData{
+		Active: "data-structures",
+	})
 }
 
 func (m *Repository) Stack(w http.ResponseWriter, r *http.Request) {

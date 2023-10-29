@@ -8,7 +8,9 @@ import (
 )
 
 func (m *Repository) Algorithms(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "algorithms.page.html", &models.TemplateData{})
+	render.RenderTemplate(w, r, "algorithms.page.html", &models.TemplateData{
+		Active: "algorithms",
+	})
 }
 
 func (m *Repository) BubbleSort(w http.ResponseWriter, r *http.Request) {

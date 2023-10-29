@@ -22,6 +22,7 @@ func (m *Repository) GetCodingProblemsPage(w http.ResponseWriter, r *http.Reques
 
 	var td models.TemplateData
 	td.Data = data
+	td.Active = "coding-problems"
 
 	render.RenderTemplate(w, r, "coding-problems.page.html", &td)
 }

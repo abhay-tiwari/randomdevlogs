@@ -32,7 +32,9 @@ func NewHandler(r *Repository) {
 }
 
 func (m *Repository) Index(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "index.page.html", &models.TemplateData{})
+	render.RenderTemplate(w, r, "index.page.html", &models.TemplateData{
+		Active: "index",
+	})
 }
 
 func (m *Repository) RangeSumBST(w http.ResponseWriter, r *http.Request) {
