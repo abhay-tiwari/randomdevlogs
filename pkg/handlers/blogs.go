@@ -113,7 +113,6 @@ func (m *Repository) PostEditBlog(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) SubmitBlog(w http.ResponseWriter, r *http.Request) {
-	log.Println("submit blog called")
 	title := r.Form.Get("title")
 	metaDescription := r.Form.Get("metaDescription")
 	ogTitle := r.Form.Get("ogTitle")
@@ -148,7 +147,11 @@ func (m *Repository) SubmitBlog(w http.ResponseWriter, r *http.Request) {
 		Content:         template.HTML(html),
 	}
 
-	m.DB.AddBlog(blog)
+	err = m.DB.AddBlog(blog)
+	if err != nil {
+		log.Println(err)
+		return
+	}
 
 	m.App.Session.Put(r.Context(), "flash", "Blog Added Successfully.")
 
