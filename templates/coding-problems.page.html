@@ -2,7 +2,7 @@
 
 {{define "content"}}
 <div class="text-white container mt-5 mb-5">
-  <div class="row mt-3 mb-4 align-items-center">
+  <div class="row mt-3 mb-1 align-items-center">
     <div class="col-md-6">
       <h2 class="text-uppercase">All Blogs</h2>
     </div>
@@ -12,7 +12,7 @@
   {{$blogs := index .Data "blogs"}}
   <div class="row">
     {{range $i, $b := $blogs }}
-    <div class="col-md-4">
+    <div class="col-md-4 mt-3">
       <div class="blog-card-inner">
         <h3>{{.Title}}</h3>
         <p class="text-white">{{.MetaDescription}}</p>
