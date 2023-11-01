@@ -12,4 +12,5 @@ type DatabaseRepo interface {
 	GetBlogById(blogId int) (*models.Blog, error)
 	GetBlogsByCategory(category string) ([]*models.Blog, error)
 	GetBlogBySlugAndCategory(slug string, category string) (*models.Blog, error)
+	GetRelatedBlogs(count int, category string) ([]*models.Blog, error)
 }

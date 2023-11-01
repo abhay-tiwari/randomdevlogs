@@ -202,3 +202,32 @@ func (m *postgresDBRepo) GetBlogById(blogId int) (*models.Blog, error) {
 
 	return blog, nil
 }
+
+func (m *postgresDBRepo) GetRelatedBlogs(count int, category string) ([]*models.Blog, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `SELECT id, title, meta_description, og_title, og_description, slug, content, created_by, category, tags FROM blogs WHERE category = $1 ORDER BY created_at desc limit $2`
+
+	blogs := make([]*models.Blog, 0)
+
+	rows, err := m.DB.QueryContext(ctx, query, category, count)
+
+	if err != nil {
+		return blogs, err
+	}
+
+	for rows.Next() {
+		i := new(models.Blog)
+
+		err := rows.Scan(&i.ID, &i.Title, &i.MetaDescription, &i.OgTitle, &i.OgDescription, &i.Slug, &i.Content, &i.CreatedBy, &i.Category, &i.Tags)
+
+		if err != nil {
+			return blogs, err
+		}
+
+		blogs = append(blogs, i)
+	}
+
+	return blogs, nil
+}

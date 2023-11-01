@@ -158,7 +158,7 @@ func (m *Repository) SubmitBlog(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/admin/all-blogs", http.StatusSeeOther)
 }
 
-func (m *Repository) GetBlogBySlugAndCategory(w http.ResponseWriter, r *http.Request) {
+func (m *Repository) GetBlogPage(w http.ResponseWriter, r *http.Request) {
 
 	category := chi.URLParam(r, "category")
 
@@ -168,13 +168,22 @@ func (m *Repository) GetBlogBySlugAndCategory(w http.ResponseWriter, r *http.Req
 
 	if err != nil {
 		log.Println(err)
+		return
+	}
 
+	relatedBlogsCount := 3
+
+	relatedBlogs, err := m.DB.GetRelatedBlogs(relatedBlogsCount, category)
+
+	if err != nil {
+		log.Println(err)
 		return
 	}
 
 	data := make(map[string]interface{})
 
 	data["blog"] = blog
+	data["relatedBlogs"] = relatedBlogs
 
 	var templateData models.TemplateData
 

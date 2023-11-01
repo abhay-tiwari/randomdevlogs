@@ -20,4 +20,24 @@
       {{.Content}}
     </div>
   {{end}}
+
+  {{$relatedBlogs := index .Data "relatedBlogs"}}
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Related Blogs</h2>
+      </div>
+    </div>
+    <div class="row">
+      {{range $rb := $relatedBlogs}}
+      <div class="col-md-4 blog-card mt-2">
+        <div class="blog-card-inner">
+          <h3>{{.Title}}</h3>
+          <p class="text-white">{{.MetaDescription}}</p>
+          <a class="btn btn-primary read-more-btn" href="/{{.Category}}/{{.Slug}}">Read More</a>
+        </div>
+      </div>
+      {{end}}
+    </div>
+  </div>
 {{end}}
