@@ -35,6 +35,14 @@
       <a class="btn btn-primary" href="/admin/add-blog">Add Blog</a>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      {{with .Data}}
+      <h2>Total Blogs: {{.totalBlogs}}</h2>
+      {{end}}
+    </div>
+  </div>
     
 
   {{$blogs := index .Data "blogs"}}

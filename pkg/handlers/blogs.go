@@ -20,6 +20,8 @@ func (m *Repository) GetAllBlogs(w http.ResponseWriter, r *http.Request) {
 
 	data["blogs"] = blogs
 
+	data["totalBlogs"] = len(blogs)
+
 	var templateData models.TemplateData
 
 	templateData.Data = data
